@@ -84,7 +84,7 @@
 				  <div class="form-row">
 				    <div class="col-md-4">
 				      <h6>Course code: </h6>
-					  <select name = "course_code">
+					  <select name = "course_code" class="form-control">
 					  <option selected>Select Course Name</option>
 						<?php 
 							$query = "SELECT * FROM program";
@@ -103,7 +103,7 @@
 				  <div class="form-row">
 				    <div class="col-md-4">
 				      <h6>Section:</h6>
-					  <select name = "section_id">
+					  <select name = "section_id" class="form-control">
 					  <option selected>Select Section</option>
 						<?php 
 							$query = "SELECT * FROM section";

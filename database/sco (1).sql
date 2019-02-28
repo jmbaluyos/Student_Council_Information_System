@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 19, 2019 at 03:42 AM
+-- Generation Time: Feb 28, 2019 at 03:46 AM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -50,9 +50,8 @@ CREATE TABLE `department` (
 --
 
 INSERT INTO `department` (`department_code`, `department_name`) VALUES
-('BSBA', 'BUSINESS Administration Department'),
-('EDUC', 'EDUCATION department'),
-('IT', 'Information technology department');
+('EDUC', 'EDUCATION DEPARTMENT'),
+('IT', 'INFORMATION TECHNOLOGY department');
 
 -- --------------------------------------------------------
 
@@ -65,6 +64,14 @@ CREATE TABLE `event` (
   `event_name` varchar(100) DEFAULT NULL,
   `date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `event`
+--
+
+INSERT INTO `event` (`event_code`, `event_name`, `date`) VALUES
+('gen ass', 'general assembly', '3234-12-31'),
+('symposium', 'anti-drugs', '2019-02-14');
 
 -- --------------------------------------------------------
 
@@ -82,9 +89,9 @@ CREATE TABLE `organization` (
 --
 
 INSERT INTO `organization` (`organization_code`, `organization_name`) VALUES
-('CodEn', 'CODING enthusiast'),
+('CodEn', 'CODING Enthusiast'),
 ('LGDC', 'LIKHANG Galaw Dance Company'),
-('RCY', 'GREEN Cross Youth');
+('RCY', 'Green Cross Youth');
 
 -- --------------------------------------------------------
 
@@ -103,8 +110,7 @@ CREATE TABLE `program` (
 --
 
 INSERT INTO `program` (`course_code`, `course_name`, `department_code`) VALUES
-('BSBA', 'Bachelor of Science in Business Administration BSBA', 'BSBA'),
-('Educ', 'Bachelor of Science in Secondary Education TLE', 'EDUC'),
+('Educ', 'Bachelor of Science in SECONDARY EDUCATION 34234', 'EDUC'),
 ('IT', 'Bachelor of Science in Information Technology', 'IT');
 
 -- --------------------------------------------------------
@@ -123,8 +129,8 @@ CREATE TABLE `section` (
 --
 
 INSERT INTO `section` (`section_id`, `year`) VALUES
-('1c', '1st year'),
-('2b', '2nd year'),
+('1c', '1st YEAR'),
+('2f', '2nd YEAR'),
 ('3a', '3rd year');
 
 -- --------------------------------------------------------
@@ -148,8 +154,9 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`id_number`, `last_name`, `first_name`, `middle_name`, `course_code`, `section_id`, `status`) VALUES
-('000000', 'baluyot', 'jm', 'none', 'BSBA', '1c', 'currently enrolled'),
-('111111', 'taman', 'juan', 'tapulan', 'BSBA', '2b', 'culled');
+('000000', 'Baluyos', 'john michael', '', 'Educ', '2f', 'currently Enrolled'),
+('111111', 'diola', 'john michael', 'none', 'IT', '1c', 'currently Enrolled'),
+('22222', 'dfd', 'sfdsf', 'df', 'IT', '2f', 'dropped');
 
 -- --------------------------------------------------------
 

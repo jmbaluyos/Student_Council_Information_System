@@ -86,16 +86,16 @@
 				<form action="list_of_student.php" method="POST">
 				  <div class="form-row">
 				    <div class="col-md-2">
-				      <h6>ID #: </h6><input type="text" class="form-control"  value="<?php echo $id_number; ?>">
+				      <h6>ID #: </h6><input type="text" class="form-control"  value="<?php echo $id_number; ?>" name="id_number">
 				    </div>
 				    <div class="col-md-4">
-				      <h6>First Name: </h6><input type="text" class="form-control"  value="<?php echo $first_name; ?>">
+				      <h6>First Name: </h6><input type="text" class="form-control"  value="<?php echo $first_name; ?>" name="first_name">
 				    </div>
 				    <div class="col-md-4">
-				      <h6>Last Name: </h6><input type="text" class="form-control"  value="<?php echo $last_name; ?>">
+				      <h6>Last Name: </h6><input type="text" class="form-control"  value="<?php echo $last_name; ?>" name="last_name">
 				    </div>
 				    <div class="col-md-2">
-				      <h6>Middle Initial: </h6><input type="text" class="form-control"  value="<?php echo $middle_name; ?>">
+				      <h6>Middle Initial: </h6><input type="text" class="form-control"  value="<?php echo $middle_name; ?>" name="middle_name">
 				    </div>
 				  </div>
 				  <br />

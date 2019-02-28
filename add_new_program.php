@@ -75,7 +75,7 @@
 				    </div>
 				    <div class="col-md-8">
 				      <h6>Department Name: </h6>
-				      <select name = "department_code">
+				      <select name = "department_code" class="form-control">
 					  <option selected>Select Department</option>
 						<?php 
 							$query = "SELECT * FROM department";

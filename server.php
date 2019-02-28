@@ -263,13 +263,12 @@ session_start();
 	
 	if (isset($_GET['DEL1'])) {
 		$id_number = $_GET['DEL1'];
-
 		$query = "SELECT * FROM student WHERE id_number='$id_number'";
 		$result = mysqli_query($db, $query);
 		if (mysqli_num_rows($result)==1){
 
 			while ($row = mysqli_fetch_assoc($result)) {
-				mysqli_query($db, "DELETE * FROM student WHERE id_number='$id_number'");
+				mysqli_query($db, "DELETE FROM student WHERE id_number='$id_number'");
 				$_SESSION['message'] = "Contact deleted!"; 
 				header('location: list_of_student.php');
 			}
@@ -277,6 +276,55 @@ session_start();
 		
 }
 
+	//add event
+		$event_code="";
+		$event_name="";
+		$date="";
+		$update = false;
+	if(isset($_POST['save1'])){
+		$event_code = $_POST['event_code'];
+		$event_name = $_POST['event_name'];
+		$date = $_POST['date'];
 
+		$sql = "INSERT INTO event (event_code, event_name, date)
+			VALUES ('$event_code','$event_name','$date')";
+			mysqli_query($db, $sql);
+			$_SESSION['message'] = "successfully saved";
+			header('location: list_of_event.php'); //redirect to homepage
+		} 
+
+	//edit event
+	if (isset($_POST['UPDATE2'])) {
+	$event_code = $_POST['event_code'];
+	$event_name = $_POST['event_name'];
+	$date = $_POST["date"];
+
+	$query = "SELECT * FROM event WHERE event_code='$event_code'";
+	$results = mysqli_query($db, $query);
+	if (mysqli_num_rows($results)==1){
+		while ($row = mysqli_fetch_assoc($results)) {
+			mysqli_query($db, "UPDATE event SET event_code ='$event_code', event_name ='$event_name', date ='$date' WHERE event_code='$event_code'");
+			$_SESSION['message'] = "Successfully updated!"; 
+			header('location: list_of_event.php');
+			}
+		}
+	}
+
+	//delete event
+	
+	if (isset($_GET['DEL2'])) {
+		$event_code = $_GET['DEL2'];
+		$query = "SELECT * FROM event WHERE event_code='$event_code'";
+		$result = mysqli_query($db, $query);
+		if (mysqli_num_rows($result)==1){
+
+			while ($row = mysqli_fetch_assoc($result)) {
+				mysqli_query($db, "DELETE FROM event WHERE event_code='$event_code'");
+				$_SESSION['message'] = "Contact deleted!"; 
+				header('location: list_of_event.php');
+			}
+		}
+		
+}
 
  ?>

@@ -1,4 +1,20 @@
-<?php include('server.php'); ?>
+<?php include('server.php'); 
+
+if (isset($_GET['EDIT2'])) {
+		$event_code = $_GET['EDIT2'];
+		$update = true;
+		$record = mysqli_query($db, "SELECT * FROM event WHERE event_code='$event_code'");
+		
+	
+			$result = mysqli_fetch_array($record);
+			$event_code = $result["event_code"];
+			$event_name = $result["event_name"];
+			$date = $result["date"];
+		
+	}	
+
+
+?>
 
 
 <!DOCTYPE html>
@@ -65,25 +81,28 @@
 			<div class="col-sm-8">
 			<center><h2>"Add new Event"</h2></center><br />
 			<center><h3>Event Information</h3></center><br />
-				<form>
+				<form action="list_of_department.php" method="POST">
 				  <div class="form-row">
 				    <div class="col-md-4">
-				      <h6>Event Code: </h6><input type="text" class="form-control" placeholder="Event Code">
+				      <h6>Event Code: </h6><input type="text" class="form-control" value="<?php echo $event_code; ?>" name="event_code">
 				  </div>
 				    <div class="col-md-8">
-				      <h6>Event Name: </h6><input type="text" class="form-control" placeholder="Event Name">
+				      <h6>Event Name: </h6><input type="text" class="form-control" value="<?php echo $event_name; ?>" name="event_name" >
 				    </div>
 				  </div>
 				  <div class = "form-row">
 				  	<div class = "col-md-4">
-				  	 <h6>Date: </h6><input type="text" class="form-control" placeholder="Date">
+				  	 <h6>Date: </h6><input type="date" class="form-control" value="<?php echo $date; ?>" name="date">
 				  	</div>
 				  </div>
 				  <br />
 				  <div class="form-row">
 					  <div class="col-md-4">
-						<button type="reset" class="btn btn-secondary">Reset</button>
-						<button type="button" class="btn btn-primary" name="save">Save</button>
+						<?php if ($update == true): ?>
+							<button type="submit" class="btn btn-secondary"  name="UPDATE2" style="background: red;">Update</button>
+						  <?php else: ?>
+							<button type="submit" class="btn btn-primary" name="save">Save</button>
+						  <?php endif ?>
 					  </div>
 				  </div>
 				</form>

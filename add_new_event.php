@@ -65,25 +65,25 @@
 			<div class="col-sm-8">
 			<center><h2>"Add new Event"</h2></center><br />
 			<center><h3>Event Information</h3></center><br />
-				<form>
+				<form action="list_of_event.php" method="POST">
 				  <div class="form-row">
 				    <div class="col-md-4">
-				      <h6>Event Code: </h6><input type="text" class="form-control" placeholder="Event Code">
+				      <h6>Event Code: </h6><input type="text" class="form-control" name="event_code" placeholder="Event Code">
 				  </div>
 				    <div class="col-md-8">
-				      <h6>Event Name: </h6><input type="text" class="form-control" placeholder="Event Name">
+				      <h6>Event Name: </h6><input type="text" class="form-control" name="event_name" placeholder="Event Name">
 				    </div>
 				  </div>
 				  <div class = "form-row">
 				  	<div class = "col-md-4">
-				  	 <h6>Date: </h6><input type="date" class="form-control" placeholder="Date">
+				  	 <h6>Date: </h6><input type="date" class="form-control" name="date" placeholder="Date">
 				  	</div>
 				  </div>
 				  <br />
 				  <div class="form-row">
 					  <div class="col-md-4">
 						<button type="reset" class="btn btn-secondary">Reset</button>
-						<button type="button" class="btn btn-primary" name="save">Save</button>
+						<button type="submit" class="btn btn-primary" name="save1">Save</button>
 					  </div>
 				  </div>
 				</form>

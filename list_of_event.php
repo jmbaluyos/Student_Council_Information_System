@@ -65,20 +65,32 @@
 			<div class="col-sm-8">	
 				<a href = "add_new_event.php"><span style="float: left; font-size: 50px; margin-right: 50px;"><i class="fa fa-plus-circle" font-size = "50px"></i></span></a>
 				<center><h3>List of Events</h3></center><br />
+				<?php $results = mysqli_query($db, "SELECT * FROM event"); ?>
 				<table class="table">
 				  <thead class="thead-dark">
 				    <tr>
 				      <th scope="col">Event code</th>
 				      <th scope="col">Event name</th>
 				      <th scope="col">Date</th>
+				      <th scope="col">Action</th>
 				    </tr>
 				  </thead>
+				  <?php while ($row = mysqli_fetch_array($results)){ ?>
 				  <tbody>
 				    <tr>
-				      <td></td>
-				      <td></td>
+				      <td><?php echo $row['event_code']?></td>
+				      <td><?php echo $row['event_name']?></td>
+				      <td><?php echo $row['date']?></td>
+				      <td>
+				      	<button type="button" class="btn btn-outline-info btn-sm fa fa-pencil"><a href="update_event.php?EDIT2=<?php echo $row['event_code']; ?>"> Edit </a></button> 
+						<button type="button" class="btn btn-outline-danger  btn-sm fa fa-trash"><a href="server.php?DEL2=<?php echo $row['event_code']; ?>">Delete</a></button>
+
+
+				      </td>
 				    </tr>
 				  </tbody>
+				  <?php 
+  				  } ?>
 				</table>			
 			</div>
 		</div>
