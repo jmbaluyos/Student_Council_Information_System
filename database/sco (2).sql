@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 28, 2019 at 03:46 AM
+-- Generation Time: Mar 02, 2019 at 01:11 AM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -50,6 +50,7 @@ CREATE TABLE `department` (
 --
 
 INSERT INTO `department` (`department_code`, `department_name`) VALUES
+('BSBA', 'BUSINESS Administration Department'),
 ('EDUC', 'EDUCATION DEPARTMENT'),
 ('IT', 'INFORMATION TECHNOLOGY department');
 
@@ -70,8 +71,31 @@ CREATE TABLE `event` (
 --
 
 INSERT INTO `event` (`event_code`, `event_name`, `date`) VALUES
-('gen ass', 'general assembly', '3234-12-31'),
-('symposium', 'anti-drugs', '2019-02-14');
+('gen ass', 'general assembly', '2019-02-28'),
+('symposium', 'anti-drugs', '2019-02-14'),
+('workshop', 'resume WRITING', '2019-03-07');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fines`
+--
+
+CREATE TABLE `fines` (
+  `id_number` varchar(50) NOT NULL,
+  `event_code` varchar(100) NOT NULL,
+  `penalty` decimal(10,2) NOT NULL,
+  `date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `fines`
+--
+
+INSERT INTO `fines` (`id_number`, `event_code`, `penalty`, `date`) VALUES
+('000000', 'symposium', '100.00', '2019-03-12'),
+('44444', 'gen ass', '50.00', '2019-03-23'),
+('5555', 'workshop', '45.00', '2019-02-28');
 
 -- --------------------------------------------------------
 
@@ -110,6 +134,7 @@ CREATE TABLE `program` (
 --
 
 INSERT INTO `program` (`course_code`, `course_name`, `department_code`) VALUES
+('BSBA', 'Bachelor of Science in Business Administration BSBA', 'EDUC'),
 ('Educ', 'Bachelor of Science in SECONDARY EDUCATION 34234', 'EDUC'),
 ('IT', 'Bachelor of Science in Information Technology', 'IT');
 
@@ -129,8 +154,14 @@ CREATE TABLE `section` (
 --
 
 INSERT INTO `section` (`section_id`, `year`) VALUES
+('1a', '1st YEAR'),
+('1b', '1st YEAR'),
 ('1c', '1st YEAR'),
-('2f', '2nd YEAR'),
+('1d', '1st year'),
+('2a', '2nd year'),
+('2c', '2nd year'),
+('2d', '2nd year'),
+('2f', '2nd year'),
 ('3a', '3rd year');
 
 -- --------------------------------------------------------
@@ -154,9 +185,12 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`id_number`, `last_name`, `first_name`, `middle_name`, `course_code`, `section_id`, `status`) VALUES
-('000000', 'Baluyos', 'john michael', '', 'Educ', '2f', 'currently Enrolled'),
-('111111', 'diola', 'john michael', 'none', 'IT', '1c', 'currently Enrolled'),
-('22222', 'dfd', 'sfdsf', 'df', 'IT', '2f', 'dropped');
+('000000', 'tamad', 'juan', 'baba', 'Educ', '2f', 'currently Enrolled'),
+('111111', 'baluyos', 'john michael', '', 'IT', '3a', 'currently Enrolled'),
+('22222', 'dfdsafs', 'dfdsfdsfd', 'f', 'Educ', '2a', 'currently enrolled'),
+('33333', 'sd', 'bbbb', 'xz', 'IT', '1d', 'dropped'),
+('44444', 'penduko', 'pedro', 'none', 'BSBA', '1c', 'dropped'),
+('5555', 'xxx', 'wwww', 'gfg', 'Educ', '1a', 'currently enrolled');
 
 -- --------------------------------------------------------
 
@@ -198,6 +232,13 @@ ALTER TABLE `department`
 --
 ALTER TABLE `event`
   ADD PRIMARY KEY (`event_code`);
+
+--
+-- Indexes for table `fines`
+--
+ALTER TABLE `fines`
+  ADD KEY `id_number` (`id_number`),
+  ADD KEY `event_code` (`event_code`);
 
 --
 -- Indexes for table `organization`
@@ -247,17 +288,24 @@ ALTER TABLE `user`
 --
 
 --
+-- Constraints for table `fines`
+--
+ALTER TABLE `fines`
+  ADD CONSTRAINT `fines_ibfk_1` FOREIGN KEY (`id_number`) REFERENCES `student` (`id_number`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fines_ibfk_2` FOREIGN KEY (`event_code`) REFERENCES `event` (`event_code`) ON UPDATE CASCADE;
+
+--
 -- Constraints for table `program`
 --
 ALTER TABLE `program`
-  ADD CONSTRAINT `program_ibfk_1` FOREIGN KEY (`department_code`) REFERENCES `department` (`department_code`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `program_ibfk_1` FOREIGN KEY (`department_code`) REFERENCES `department` (`department_code`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `student`
 --
 ALTER TABLE `student`
-  ADD CONSTRAINT `student_ibfk_1` FOREIGN KEY (`course_code`) REFERENCES `program` (`course_code`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `student_ibfk_2` FOREIGN KEY (`section_id`) REFERENCES `section` (`section_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `student_ibfk_1` FOREIGN KEY (`course_code`) REFERENCES `program` (`course_code`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `student_ibfk_2` FOREIGN KEY (`section_id`) REFERENCES `section` (`section_id`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

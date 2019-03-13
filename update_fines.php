@@ -1,10 +1,26 @@
-<?php include('server.php'); ?>
+<?php include('server.php'); 
+
+
+	if (isset($_GET['EDIT3'])) {
+		$id_number = $_GET['EDIT3'];
+		$update = true;
+		$record = mysqli_query($db, "SELECT * FROM fines WHERE id_number='$id_number'");
+		
+	
+			$result = mysqli_fetch_array($record);
+			$id_number = $result["id_number"];
+			$event_code = $result["event_code"];
+			$penalty = $result["penalty"];
+			$date = $result["date"];
+		
+	}	
+?>
 
 
 <!DOCTYPE html>
 <html>
 <head>
-	<title>SCO</title>
+	<title>Supreme Student Council</title>
 		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 		<script type="text/javascript" src="bootstrap/js/jquery-slim.min.js"></script>
 		<script type="text/javascript" src="bootstrap/js/popper.min.js"></script>
@@ -26,12 +42,7 @@
 		      </li>
 		    </ul>
 		    	</center><p style="color:white; font-size: 50px; margin-right: 400px;">Supreme Student Council<strong></strong></p>
-		    	<div class="btn-group">
-							<button type="button" class=" dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-						<div class="dropdown-menu">
-							<a class="dropdown-item" href="login.php"><i class ="fa fa-sign-out">Sign Out</i></a>
-					 	</div>
-				</div>
+		    	<a href="logout.php">Logout</a> 
 		  </div>
 		</nav>
 	</div>
@@ -63,27 +74,61 @@
 				</div>
 			</div>
 			<div class="col-sm-8">
-			<center><h2>"Add new Fines"</h2></center><br />
+			<center><h2>"Update Fines"</h2></center><br />
 			<center><h3>Fines Information</h3></center><br />
-				<form>
+				<form action="fines.php" method="POST">
 				  <div class="form-row">
+				  	<div class="col-md-6">
+				      <h6>Student Name: </h6>
+					  <select name = "id_number" class="form-control">
+					  <option selected>Select Student Name</option>
+						<?php 
+							$query = "SELECT * FROM student";
+							$results = mysqli_query($db, $query); 
+							$count = mysqli_num_rows($results);
+							if($count = 1){
+								while ($row = mysqli_fetch_array($results)){
+						?>
+								<option value = "<?php echo $row['id_number'] ?>"><?php echo $row['last_name']." ".$row['first_name']." ".$row['middle_name']?></option>
+							
+							<?php } 
+				  			}?>
+					  </select>
+				  	</div>
 				    <div class="col-md-4">
-				      <h6>Event Code: </h6><input type="text" class="form-control" placeholder="Event Code">
-				  </div>
-				    <div class="col-md-5">
-				      <h6>Penalty: </h6><input type="text" class="form-control" placeholder="Penalty">
-				    </div>
+				      <h6>Event Code: </h6>
+				      <select name = "event_code" class="form-control">
+					  <option selected>Select Event Code</option>
+						<?php 
+							$query = "SELECT * FROM event";
+							$results = mysqli_query($db, $query); 
+							$count = mysqli_num_rows($results);
+							if($count = 1){
+								while ($row = mysqli_fetch_array($results)){
+						?>
+								<option value = "<?php echo $row['event_code'] ?>"><?php echo $row['event_name'] ?></option>
+							
+							<?php } 
+				  			}?>
+					  </select>
+				  	</div>
 				  </div>
 				  <div class = "form-row">
+				    <div class="col-md-5">
+				      <h6>Penalty: </h6><input type="text" class="form-control" value="<?php echo $penalty; ?>" name="penalty" placeholder="Penalty">
+				    </div>
 				  	<div class = "col-md-4">
-				  	 <h6>Date: </h6><input type="text" class="form-control" placeholder="Date">
+				  	 <h6>Date: </h6><input type="date" class="form-control" value="<?php echo $date; ?>" name="date" placeholder="Date">
 				  	</div>
 				  </div>
 				  <br />
 				  <div class="form-row">
 					  <div class="col-md-4">
-						<button type="reset" class="btn btn-secondary">Reset</button>
-						<button type="button" class="btn btn-primary" name="save">Save</button>
+						<?php if ($update == true): ?>
+							<button type="submit" class="btn btn-secondary"  name="UPDATE3" style="background: red;">Update</button>
+						  <?php else: ?>
+							<button type="submit" class="btn btn-primary" name="save">Save</button>
+						  <?php endif ?>
 					  </div>
 				  </div>
 				</form>

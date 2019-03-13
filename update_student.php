@@ -22,7 +22,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>SCO</title>
+	<title>Supreme Student Council</title>
 		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 		<script type="text/javascript" src="bootstrap/js/jquery-slim.min.js"></script>
 		<script type="text/javascript" src="bootstrap/js/popper.min.js"></script>
@@ -44,12 +44,7 @@
 		      </li>
 		    </ul>
 		    	</center><p style="color:white; font-size: 50px; margin-right: 400px;">Supreme Student Council<strong></strong></p>
-		    	<div class="btn-group">
-							<button type="button" class=" dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-						<div class="dropdown-menu">
-							<a class="dropdown-item" href="login.php"><i class ="fa fa-sign-out">Sign Out</i></a>
-					 	</div>
-				</div>
+		    	<a href="logout.php">Logout</a> 
 		  </div>
 		</nav>
 	</div>
@@ -86,7 +81,7 @@
 				<form action="list_of_student.php" method="POST">
 				  <div class="form-row">
 				    <div class="col-md-2">
-				      <h6>ID #: </h6><input type="text" class="form-control"  value="<?php echo $id_number; ?>" name="id_number">
+				      <h6>ID #: </h6><input type="text" class="form-control"  value="<?php echo $id_number; ?>" name="id_number" readonly>
 				    </div>
 				    <div class="col-md-4">
 				      <h6>First Name: </h6><input type="text" class="form-control"  value="<?php echo $first_name; ?>" name="first_name">
@@ -102,7 +97,7 @@
 				  <div class="form-row">
 				    <div class="col-md-4">
 				      <h6>Course code: </h6>
-				      <select name = "course_code">
+				      <select name = "course_code" required>
 					  <option selected>Select Course Name</option>
 						<?php 
 							$query = "SELECT * FROM program";
@@ -137,7 +132,7 @@
 						  </select>	
 					    </div>
 					    <div class="col-md-4">
-					      <h6>Status: </h6><input type="text" class="form-control" value="<?php echo $id_number; ?>" name="status">
+					      <h6>Status: </h6><input type="text" class="form-control" value="<?php echo $status; ?>" name="status">
 					    </div>
 				    </div>
 				    <br />

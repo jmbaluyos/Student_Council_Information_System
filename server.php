@@ -1,7 +1,34 @@
 <?php
 session_start();
+$errors = array();
 	$db = mysqli_connect('localhost','root','','sco');
 
+		//log in user
+if (isset($_POST['login'])){
+	$username = mysqli_real_escape_string($db, $_POST['username']);
+	$password = mysqli_real_escape_string($db, $_POST['password']);
+
+	if (empty($username)){
+		array_push($errors, "Username is required");
+	}
+		if (empty($password)){
+		array_push($errors, "Password is required");
+	}
+	if (count($errors) == 0){
+		$password = md5($password);
+		$sql = "SELECT * FROM user WHERE username = '$username' AND password = '$password'";
+		$results = mysqli_query($db, $sql);
+		$num_count = mysqli_num_rows($results);
+		if ($num_count == 1){
+		$_SESSION['username'] = $username;
+		$_SESSION['success'] = "Welcome";
+		header('location: index.php?username='.$username);
+	}
+	else{
+		array_push($errors, "Invalid username or Password");
+		}
+	}
+}
 	//add department
 		$department_code="";
 		$department_name="";
@@ -326,5 +353,41 @@ session_start();
 		}
 		
 }
+
+	//add fines
+		$id_number = "";
+		$event_code = "";
+		$penalty = "";
+		$date = "";
+		$update = false;
+	if(isset($_POST['save'])){
+		$id_number = $_POST['id_number'];
+		$event_code = $_POST['event_code'];
+		$penalty = $_POST['penalty'];
+		$date = $_POST['date'];
+
+		$sql = "INSERT INTO fines (id_number, event_code, penalty, date)
+			VALUES ('$id_number','$event_code','$penalty' ,'$date')";
+			mysqli_query($db, $sql);
+			$_SESSION['message'] = "successfully saved";
+			header('location: fines.php'); //redirect to homepage
+	}
+	//edit event
+	if (isset($_POST['UPDATE3'])) {
+		$id_number = $_POST['id_number'];
+		$event_code = $_POST['event_code'];
+		$penalty = $_POST['penalty'];
+		$date = $_POST['date'];
+
+	$query = "SELECT * FROM fines WHERE id_number='$id_number'";
+	$results = mysqli_query($db, $query);
+	if (mysqli_num_rows($results)==1){
+		while ($row = mysqli_fetch_assoc($results)) {
+			mysqli_query($db, "UPDATE fines SET id_number ='$id_number', event_code ='$event_code', penalty ='$penalty' date ='$date' WHERE id_number='$id_number'");
+			$_SESSION['message'] = "Successfully updated!"; 
+			header('location: fines.php');
+			}
+		}
+	}
 
  ?>

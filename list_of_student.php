@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>SCO</title>
+	<title>Supreme Student Council</title>
 		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 		<script type="text/javascript" src="bootstrap/js/jquery-slim.min.js"></script>
 		<script type="text/javascript" src="bootstrap/js/popper.min.js"></script>
@@ -26,12 +26,7 @@
 		      </li>
 		    </ul>
 		    	</center><p style="color:white; font-size: 50px; margin-right: 400px;">Supreme Student Council<strong></strong></p>
-		    	<div class="btn-group">
-							<button type="button" class=" dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-						<div class="dropdown-menu">
-							<a class="dropdown-item" href="login.php"><i class ="fa fa-sign-out">Sign Out</i></a>
-					 	</div>
-				</div>
+		    	<a href="logout.php">Logout</a>
 		  </div>
 		</nav>
 	</div>
@@ -66,7 +61,7 @@
 				<a href = "add_new_student.php"><span style="float: left; font-size: 50px; margin-right: 50px;"><i class="fa fa-plus-circle" font-size = "50px"></i></span></a>
 				<center><h3>List of student</h3></center><br />
 				<?php $results = mysqli_query($db, "SELECT * FROM student,program  WHERE student.course_code = program.course_code"); ?>
-				<table class="table">
+				<table class="table table-primary">
 				  <thead class="thead-dark">
 				    <tr>
 					  <th scope="col">ID Number</th>

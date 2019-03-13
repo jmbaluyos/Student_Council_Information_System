@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>SCO</title>
+	<title>Supreme Student Council</title>
 		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 		<script type="text/javascript" src="bootstrap/js/jquery-slim.min.js"></script>
 		<script type="text/javascript" src="bootstrap/js/popper.min.js"></script>
@@ -26,12 +26,7 @@
 		      </li>
 		    </ul>
 		    	</center><p style="color:white; font-size: 50px; margin-right: 400px;">Supreme Student Council<strong></strong></p>
-		    	<div class="btn-group">
-							<button type="button" class=" dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-						<div class="dropdown-menu">
-							<a class="dropdown-item" href="login.php"><i class ="fa fa-sign-out">Sign Out</i></a>
-					 	</div>
-				</div>
+		    	<a href="logout.php">Logout</a> 
 		  </div>
 		</nav>
 	</div>
@@ -65,30 +60,61 @@
 			<div class="col-sm-8">
 			<center><h2>"Add new Fines"</h2></center><br />
 			<center><h3>Fines Information</h3></center><br />
-				<form>
+				<form action="fines.php" method="POST">
 				  <div class="form-row">
-				    <div class="col-md-4">
-				      <h6>Event Code: </h6><input type="text" class="form-control" placeholder="Event Code">
-				  </div>
-				    <div class="col-md-5">
-				      <h6>Penalty: </h6><input type="text" class="form-control" placeholder="Penalty">
-				    </div>
-				  </div>
-				  <div class = "form-row">
-				  	<div class = "col-md-4">
-				  	 <h6>Date: </h6><input type="text" class="form-control" placeholder="Date">
+				  	<div class="col-md-12">
+				  	<?php $results = mysqli_query($db, "SELECT * FROM student"); ?>
+				      <table class="table table-primary">
+				      	<thead class="thead-dark">
+					    <tr>
+					      <th scope="col">List of Student</th>
+					      <th scope="col">Event Code</th>
+					      <th scope="col">Penalty</th>
+					      <th scope="col">Date</th>
+					    </tr>
+					    </thead>
+					    <?php while ($row = mysqli_fetch_array($results)){ ?>
+					    <tbody>
+					    	<td><?php echo ucwords($row['first_name'] ." ". $row['middle_name'] ." ". $row['last_name']) ?></td>
+					    	<td>
+					    		<select name = "event_code" class="form-control">
+								  <option selected>Select Event Code</option>
+									<?php 
+										$query = "SELECT * FROM event";
+										$results = mysqli_query($db, $query); 
+										$count = mysqli_num_rows($results);
+										if($count = 1){
+											while ($row = mysqli_fetch_array($results)){
+									?>
+											<option value = "<?php echo $row['event_code'] ?>"><?php echo $row['event_name'] ?></option>
+										
+										<?php } 
+							  			}?>
+								</select>
+							</td>
+							<td><input type="text" class="form-control" name="penalty" placeholder="Penalty"></td>
+							<td><input type="date" class="form-control" name="date" placeholder="Date"></td>
+					    </tbody>
+				      </table> 
 				  	</div>
 				  </div>
 				  <br />
 				  <div class="form-row">
 					  <div class="col-md-4">
 						<button type="reset" class="btn btn-secondary">Reset</button>
-						<button type="button" class="btn btn-primary" name="save">Save</button>
+						<button type="submit" class="btn btn-primary" name="save" onclick="myFunction()">Save</button>
 					  </div>
 				  </div>
+				  <?php 
+  				  		} ?>
 				</form>
 			</div>
 		</div>
 	</div>
+<script>
+function myFunction() {
+  confirm("Successfully Save!");
+}
+</script>
 </body>
 </html>
