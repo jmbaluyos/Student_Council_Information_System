@@ -1,4 +1,23 @@
-<?php include('server.php'); ?>
+<?php include('server.php'); 
+
+		
+	if (isset($_GET['edit5'])) {
+		$instructor_id = $_GET['edit5'];
+		$update = true;
+		$record = mysqli_query($db, "SELECT * FROM org_moderator WHERE instructor_id='$instructor_id'");
+		
+	
+			$n = mysqli_fetch_array($record);
+			$instructor_id = $n["instructor_id"];
+			$last_name = $n["last_name"];
+			$first_name = $n["first_name"];
+			$middle_name = $n["middle_name"];
+			$organization_code = $n["organization_code"];
+		
+	}	
+
+
+?>
 
 
 <!DOCTYPE html>
@@ -59,21 +78,21 @@
 				</div>
 			</div>
 			<div class="col-sm-8">
-			<center><h2>"Add new Organization Moderator"</h2></center><br />
+			<center><h2>"Update Organization Moderator"</h2></center><br />
 			<center><h3>Organization Moderator Information</h3></center><br />
-				<form action = "add_new_organization_moderator.php" method="POST">
+				<form action = "list_of_organization_moderator.php" method="POST">
 				  <div class="form-row">
 				    <div class="col-md-4">
-				      <h6>Instructor ID#</h6><input type="text" class="form-control" name="instructor_id" placeholder="Instructor Id">
+				      <h6>Instructor ID#</h6><input type="text" class="form-control" value="<?php echo $instructor_id; ?>"  name="instructor_id" placeholder="Instructor Id" readonly>
 					</div>
 				    <div class="col-md-8">
-				      <h6>Lastname: </h6><input type="text" class="form-control" name= "last_name" placeholder="Enter last name">
+				      <h6>Lastname: </h6><input type="text" class="form-control" value="<?php echo $last_name; ?>"  name= "last_name" placeholder="Enter last name">
 				    </div>
 					<div class="col-md-8">
-				      <h6>Firstname: </h6><input type="text" class="form-control" name= "first_name" placeholder="Enter first name">
+				      <h6>Firstname: </h6><input type="text" class="form-control" value="<?php echo $first_name; ?>"  name= "first_name" placeholder="Enter first name">
 				    </div>
 					<div class="col-md-8">
-				      <h6>M.I: </h6><input type="text" class="form-control" name= "middle_name" placeholder="Enter middle name">
+				      <h6>M.I: </h6><input type="text" class="form-control" value="<?php echo $middle_name; ?>"  name="middle_name" placeholder="Enter middle name">
 				    </div>
 					<div class="col-md-8">
 				      <h6>Organization Code: </h6>
@@ -91,7 +110,7 @@
 										<?php } 
 							  			}?>
 					  	</select>
-					  	<h6>Academic Year: </h6>
+					  <h6>Academic Year: </h6>
 				      	<select name = "academic_code" class="form-control">
 				     		 <option selected>Select Academic Year</option>
 									<?php 
@@ -109,12 +128,13 @@
 				    </div>
 				  </div>
 				  <br />
-				  <div class="form-row">
-					  <div class="col-md-4">
-						<button type="reset" class="btn btn-secondary">Reset</button>
-						<button type="submit" class="btn btn-primary" name="save5" onclick="myFunction()">Save</button>
+				  <div class="col-md-4 text-center submit-data">
+					  <?php if ($update == true): ?>
+						<button type="submit" class="btn btn-secondary"  name="update5" style="background: red;">Update</button>
+					  <?php else: ?>
+						<button type="submit" class="btn btn-primary" name="save">Save</button>
+					  <?php endif ?>
 					  </div>
-				  </div>
 				</form>
 			</div>
 		</div>

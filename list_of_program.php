@@ -19,7 +19,7 @@
 		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
 		    <span class="navbar-toggler-icon"></span>
 		  </button>
-		   <a href = "index.php"><img src = "ssc.PNG" style=" height:70px; width:70px;"></a>
+		   <a href = "index.php"><img src = "picture/ssc.PNG" style=" height:70px; width:70px;"></a>
 		  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
 		    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 		      <li class="nav-item active">
@@ -33,31 +33,24 @@
 	<br /><br />
 	<!-- Show Data -->
 	<div class="container-fluid">
-		<div class="row">
-			<div class="col-sm-2" >
-				<div class="vertical_line">
-				<ul style="list-style: none;">
-					<li><a href = "list_of_student.php"><button type="button" class="btn btn-outline-dark">List of Student</button></a></li><br />
-					<li><a href ="list_of_organization.php"><button type="button" class="btn btn-outline-dark">Organization</button></a></li><br />
-					<li><a href ="list_of_section.php"><button type="button" class="btn btn-outline-dark">Sections</button></a></li><br />
-					<li><a href ="list_of_department.php"><button type="button" class="btn btn-outline-dark">Departments</button></a></li><br />
-					<li><a href ="list_of_program.php"><button type="button" class="btn btn-outline-dark">Program</button></a></li><br />
-					<li><a href ="list_of_event.php"><button type="button" class="btn btn-outline-dark">Events</button></a></li><br />
-					<li><a href ="fines.php"><button type="button" class="btn btn-outline-dark">Fines</button></a></li><br />
-					<li><a href ="payment.php"><button type="button" class="btn btn-outline-dark">Payment</button></a></li><br />
-					<li><a href ="list_of_organization_member.php"><button type="button" class="btn btn-outline-dark">Organization Member</button></a></li><br />
-					<li><a href ="list_of_organization_officer.php"><button type="button" class="btn btn-outline-dark">Organization Officer</button></a></li><br />
-					<li><a href ="list_of_organization_moderator.php"><button type="button" class="btn btn-outline-dark">Organization Moderator</button></a></li><br />
-					<li><a href ="list_of_section_officer.php"><button type="button" class="btn btn-outline-dark">Section Officer</button></a></li><br />				
-				</ul>
+				<div class="btn-group btn-group-lg" role="group"">
+					
+					<a href = "list_of_student.php"><button type="button" class="btn btn-outline-dark">Student</button></a>
+					<a href ="list_of_organization.php"><button type="button" class="btn btn-outline-dark">Organization</button></a>
+					<a href ="list_of_section.php"><button type="button" class="btn btn-outline-dark">Sections</button></a>
+					<a href ="list_of_department.php"><button type="button" class="btn btn-outline-dark">Departments</button>
+					<a href ="list_of_program.php"><button type="button" class="btn btn-outline-dark">Program</button></a>
+					<a href ="list_of_event.php"><button type="button" class="btn btn-outline-dark">Events</button></a>
+					<a href ="fines.php"><button type="button" class="btn btn-outline-dark">Fines</button></a>
+					<a href ="payment.php"><button type="button" class="btn btn-outline-dark">Payment</button></a>
+					<a href ="list_of_organization_member.php"><button type="button" class="btn btn-outline-dark">Org. Member</button></a>
+					<a href ="list_of_organization_officer.php"><button type="button" class="btn btn-outline-dark">Org. Officer</button></a>
+					<a href ="list_of_organization_moderator.php"><button type="button" class="btn btn-outline-dark">Org. Moderator</button></a>
+					<a href ="list_of_section_officer.php"><button type="button" class="btn btn-outline-dark">Section Officer</button></a>
+					<a href ="list_of_acad_year.php"><button type="button" class="btn btn-outline-dark">Academic Year</button></a>	
+				
 				</div>
-			</div>
-			<div class="col-sm-1" >
-				<div class="vertical_line">
-
-				</div>
-			</div>
-			<div class="col-sm-9">	
+				<br /><br />
 				<a href = "add_new_program.php"><span style="float: left; font-size: 50px; margin-right: 50px;"><i class="fa fa-plus-circle" font-size = "50px"></i></span></a>
 				<center><h3>List of Program</h3></center><br />
 				<?php $results = mysqli_query($db, "SELECT * FROM program,department WHERE program.department_code = department.department_code"); ?>
@@ -78,9 +71,9 @@
 				      <td><?php echo $row['department_name']?></td>
 				      <td>
 			 
-								<button type="button" class="btn btn-outline-info btn-sm fa fa-pencil"><a href="update_program.php?edit=<?php echo $row['course_code']; ?>"> Edit </a></button> 
+							<button type="button" class="btn btn-outline-info btn-sm fa fa-pencil"><a href="update_program.php?edit=<?php echo $row['course_code']; ?>"> Edit </a></button> 
 
-								<button type="button" class="btn btn-outline-danger btn-sm fa fa-trash" data-toggle="modal" data-target="#exampleModal">Delete</button>
+							<button type="button" class="btn btn-outline-danger btn-sm fa fa-trash" data-toggle="modal" data-target="#exampleModal">Delete</button>
 
 							<!-- Modal -->
 							<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -93,11 +86,10 @@
 							        </button>
 							      </div>
 							      <div class="modal-body">
-							        Are you sure you want to delete this record?
+							        Ooopss!! Im sorry but you can't Delete this data!
 							      </div>
 							      <div class="modal-footer">
-							        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">No</button>
-							        	<button type="button" class="btn btn-outline-danger"><a href="server.php?del=<?php echo $row['course_code']; ?>"> Yes </a></button>
+							        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">OK</button>
 							      </div>
 							    </div>
 							  </div>
@@ -110,8 +102,6 @@
 				  <?php 
   				  } ?>
 				</table>			
-			</div>
-		</div>
 	</div>
 </body>
 </html>

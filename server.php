@@ -308,7 +308,7 @@ if (isset($_POST['login'])){
 		$event_name="";
 		$date="";
 		$update = false;
-	if(isset($_POST['save1'])){
+	if(isset($_POST['save2'])){
 		$event_code = $_POST['event_code'];
 		$event_name = $_POST['event_name'];
 		$date = $_POST['date'];
@@ -358,36 +358,265 @@ if (isset($_POST['login'])){
 		$id_number = "";
 		$event_code = "";
 		$penalty = "";
-		$date = "";
 		$update = false;
-	if(isset($_POST['save'])){
+	if(isset($_POST['save1'])){
 		$id_number = $_POST['id_number'];
 		$event_code = $_POST['event_code'];
 		$penalty = $_POST['penalty'];
-		$date = $_POST['date'];
 
-		$sql = "INSERT INTO fines (id_number, event_code, penalty, date)
-			VALUES ('$id_number','$event_code','$penalty' ,'$date')";
+		$sql = "INSERT INTO fines (id_number, event_code, penalty )
+			VALUES ('$id_number','$event_code','$penalty')";
 			mysqli_query($db, $sql);
 			$_SESSION['message'] = "successfully saved";
-			header('location: fines.php'); //redirect to homepage
+			header('location: add_new_fines.php'); //redirect to homepage
 	}
-	//edit event
-	if (isset($_POST['UPDATE3'])) {
+
+	//edit fines
+	if (isset($_POST['edit_1'])) {
 		$id_number = $_POST['id_number'];
 		$event_code = $_POST['event_code'];
 		$penalty = $_POST['penalty'];
-		$date = $_POST['date'];
 
 	$query = "SELECT * FROM fines WHERE id_number='$id_number'";
 	$results = mysqli_query($db, $query);
 	if (mysqli_num_rows($results)==1){
 		while ($row = mysqli_fetch_assoc($results)) {
-			mysqli_query($db, "UPDATE fines SET id_number ='$id_number', event_code ='$event_code', penalty ='$penalty' date ='$date' WHERE id_number='$id_number'");
+			mysqli_query($db, "UPDATE fines SET id_number ='$id_number', event_code ='$event_code', penalty ='$penalty' WHERE id_number='$id_number'");
 			$_SESSION['message'] = "Successfully updated!"; 
 			header('location: fines.php');
 			}
 		}
+}
+
+	//add section officer
+		$id_number = "";
+		$position = "";
+		$section_id="";
+		$academic_code = "";
+		$update = false;
+	if(isset($_POST['save8'])){
+		$id_number = $_POST['id_number'];
+		$section_id = $_POST['section_id'];
+		$position = $_POST['position'];
+		$academic_code = $_POST['academic_code'];
+
+		$sql = "INSERT INTO section_officer (id_number, position, section_id, academic_code )
+			VALUES ('$id_number','$position','$section_id','$academic_code')";
+			mysqli_query($db, $sql);
+			$_SESSION['message'] = "successfully saved";
+			header('location: add_new_section_officer.php'); //redirect to homepage
 	}
+
+	//edit section officer
+	if (isset($_POST['EDIT8'])) {
+		$id_number = $_POST['id_number'];
+		$position = $_POST['position'];
+		$academic_code = $_POST['academic_code'];
+		$section_id = $_POST['section_id'];
+
+	$query = "SELECT * FROM section_officer WHERE id_number='$id_number'";
+	$results = mysqli_query($db, $query);
+	if (mysqli_num_rows($results)==1){
+		while ($row = mysqli_fetch_assoc($results)) {
+			mysqli_query($db, "UPDATE section_officer SET id_number ='$id_number', section_id = '$section_id', position ='$position', academic_code ='$academic_code' WHERE id_number='$id_number'");
+			$_SESSION['message'] = "Successfully updated!"; 
+			header('location: list_of_section_officer.php');
+			}
+		}
+}
+
+
+	//add organization officer
+		$id_number = "";
+		$position = "";
+		$organization_code = "";
+		$academic_code = "";
+		$update = false;
+	if(isset($_POST['save6'])){
+		$id_number = $_POST['id_number'];
+		$position = $_POST['position'];
+		$organization_code = $_POST['organization_code'];
+		$academic_code = $_POST['academic_code'];
+
+		$sql = "INSERT INTO org_officer (id_number, position, organization_code, academic_code )
+			VALUES ('$id_number','$position','$organization_code','$academic_code')";
+			mysqli_query($db, $sql);
+			$_SESSION['message'] = "successfully saved";
+			header('location: add_new_organization_officer.php'); //redirect to homepage
+	}
+	//edit organization officer
+	if (isset($_POST['update6'])) {
+		$id_number = $_POST['id_number'];
+		$position = $_POST['position'];
+		$organization_code = $_POST['organization_code'];
+		$academic_code = $_POST['academic_code'];
+
+	$query = "SELECT * FROM org_officer WHERE id_number='$id_number'";
+	$results = mysqli_query($db, $query);
+	if (mysqli_num_rows($results)==1){
+		while ($row = mysqli_fetch_assoc($results)) {
+			mysqli_query($db, "UPDATE org_officer SET id_number ='$id_number', position ='$position', organization_code ='$organization_code', academic_code ='$academic_code'  WHERE id_number='$id_number'");
+			$_SESSION['message'] = "Successfully updated!"; 
+			header('location: list_of_organization_officer.php');
+			}
+		}
+}
+
+
+	//add organization member
+		$organization_code = "";
+		$id_number = "";
+		$academic_code = "";
+		$update = false;
+	if(isset($_POST['SAVE4'])){
+		$organization_code = $_POST['organization_code'];
+		$id_number = $_POST['id_number'];
+		$academic_code = $_POST['academic_code'];
+
+		$sql = "INSERT INTO org_member (organization_code, id_number, academic_code )
+			VALUES ('$organization_code','$id_number','$academic_code')";
+			mysqli_query($db, $sql);
+			$_SESSION['message'] = "successfully saved";
+			header('location: add_new_organization_member.php'); //redirect to homepage
+	}
+
+	//edit organization member
+	if (isset($_POST['UPDATE4'])) {
+		$id_number = $_POST['id_number'];
+		$organization_code = $_POST['organization_code'];
+		$academic_code = $_POST['academic_code'];
+
+	$query = "SELECT * FROM org_member WHERE id_number='$id_number'";
+	$results = mysqli_query($db, $query);
+	if (mysqli_num_rows($results)==1){
+		while ($row = mysqli_fetch_assoc($results)) {
+			mysqli_query($db, "UPDATE org_member SET id_number ='$id_number', organization_code ='$organization_code', academic_code ='$academic_code'  WHERE id_number='$id_number'");
+			$_SESSION['message'] = "Successfully updated!"; 
+			header('location: list_of_organization_member.php');
+			}
+		}
+}
+
+
+	//add organization moderator
+		$instructor_id = "";
+		$last_name = "";
+		$first_name = "";
+		$middle_name = "";
+		$organization_code = "";
+		$academic_code="";
+		$update = false;
+	if(isset($_POST['save5'])){
+		$instructor_id = $_POST['instructor_id'];
+		$last_name = $_POST['last_name'];
+		$first_name = $_POST['first_name'];
+		$middle_name = $_POST['middle_name'];
+		$organization_code = $_POST['organization_code'];
+		$academic_code = $_POST['academic_code'];
+
+		$sql = "INSERT INTO org_moderator (instructor_id, last_name, first_name, middle_name, organization_code, academic_code )
+			VALUES ('$instructor_id','$last_name','$first_name','$middle_name','$organization_code','$academic_code')";
+			mysqli_query($db, $sql);
+			$_SESSION['message'] = "successfully saved";
+			header('location: add_new_organization_moderator.php'); //redirect to homepage
+	}
+
+	//edit organization moderator
+	if (isset($_POST['update5'])) {
+		$instructor_id = $_POST['instructor_id'];
+		$last_name = $_POST['last_name'];
+		$first_name = $_POST['first_name'];
+		$middle_name = $_POST['middle_name'];
+		$organization_code = $_POST['organization_code'];
+		$academic_code = $_POST['academic_code'];
+
+	$query = "SELECT * FROM org_moderator WHERE instructor_id='$instructor_id'";
+	$result = mysqli_query($db, $query);
+	if (mysqli_num_rows($result)==1){
+		while ($row = mysqli_fetch_assoc($result)) {
+			mysqli_query($db, "UPDATE org_moderator SET instructor_id ='$instructor_id', last_name ='$last_name', first_name ='$first_name', middle_name ='$middle_name',organization_code ='$organization_code',academic_code ='$academic_code' WHERE instructor_id='$instructor_id'");
+			$_SESSION['message'] = "Successfully updated!"; 
+			header('location: list_of_organization_moderator.php');
+			}
+		}
+}
+
+
+	//add academic year
+		$academic_code = "";
+		$acad_year = "";
+		$semester = "";
+		$update = false;
+	if(isset($_POST['Save3'])){
+		$academic_code = $_POST['academic_code'];
+		$acad_year = $_POST['acad_year'];
+		$semester = $_POST['semester'];
+
+		$sql = "INSERT INTO academic_year (academic_code, acad_year, semester )
+			VALUES ('$academic_code','$acad_year','$semester')";
+			mysqli_query($db, $sql);
+			$_SESSION['message'] = "successfully saved";
+			header('location: add_new_acad_year.php'); //redirect to homepage
+	}
+
+	//edit academic year
+	if (isset($_POST['EDIT3'])) {
+		$academic_code = $_POST['academic_code'];
+		$acad_year = $_POST['acad_year'];
+		$semester = $_POST['semester'];
+
+	$query = "SELECT * FROM academic_year WHERE academic_code='$academic_code'";
+	$results = mysqli_query($db, $query);
+	if (mysqli_num_rows($results)==1){
+		while ($row = mysqli_fetch_assoc($results)) {
+			mysqli_query($db, "UPDATE academic_year SET academic_code ='$academic_code', acad_year ='$acad_year', semester ='$semester', WHERE academic_code='$academic_code'");
+			$_SESSION['message'] = "Successfully updated!"; 
+			header('location: list_of_acad_year.php');
+			}
+		}
+}
+
+	//add payment
+		$id_number = "";
+		$event_code = "";
+		$penalty = "";
+		$amount = "";
+		$status = "";
+		$balance = "";
+		$status = "";
+		$update = false;
+	if(isset($_POST['save7'])){
+		$id_number = $_POST['id_number'];
+		$event_code = $_POST['event_code'];
+		$penalty = $_POST['penalty'];
+		$amount = $_POST['amount'];
+		$status = $_POST['status'];
+		$balance = $_POST['balance'];
+		$date = $_POST['date'];
+
+		$sql = "INSERT INTO payment (id_number, event_code, penalty, amount, status, balance, date )
+			VALUES ('$id_number','$event_code','$penalty','$amount','$status','$balance','$date')";
+			mysqli_query($db, $sql);
+			$_SESSION['message'] = "successfully saved";
+			header('location: add_new_payment.php'); //redirect to homepage
+	}
+
+	//edit payment
+	if (isset($_POST['EDIT4'])) {
+		$amount = $_POST['amount'];
+		$status = $_POST['status'];
+		$balance = $_POST['balance'];
+		$date = $_POST['date'];
+
+	$query = "SELECT * FROM payment WHERE id_number='$id_number'";
+	$results = mysqli_query($db, $query);
+	if (mysqli_num_rows($results)==1){
+		while ($row = mysqli_fetch_assoc($results)) {
+			mysqli_query($db, "INSERT INTO payment SET amount ='$amount', status ='$status', balance ='$balance', date ='$date' WHERE id_number='$id_number'");
+			$_SESSION['message'] = "Successfully updated!"; 
+			header('location: payment.php');
+			}
+		}
+}
 
  ?>

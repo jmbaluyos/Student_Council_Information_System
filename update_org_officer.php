@@ -1,4 +1,22 @@
-<?php include('server.php'); ?>
+<?php include('server.php'); 
+
+		
+	if (isset($_GET['edit6'])) {
+		$id_number = $_GET['edit6'];
+		$update = true;
+		$record = mysqli_query($db, "SELECT * FROM org_officer WHERE id_number='$id_number'");
+		
+	
+			$n = mysqli_fetch_array($record);
+			$organization_code = $n["organization_code"];
+			$id_number = $n["id_number"];
+			$position = $n["position"];
+			$academic_code = $n["academic_code"];
+		
+	}	
+
+
+?>
 
 
 <!DOCTYPE html>
@@ -34,7 +52,7 @@
 	<!-- Show Data -->
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-sm-3" >
+			<div class="col-sm-2" >
 				<div class="btn-group-vertical">
 				<ul style="list-style: none;">
 					<li><a href = "list_of_student.php"><button type="button" class="btn btn-dark">List of Student</button></a></li>
@@ -53,32 +71,52 @@
 				</ul>
 				</div>
 			</div>
-			<div class="col-sm-1" >
+			<div class="col-sm-2" >
 				<div class="vertical_line">
 
 				</div>
 			</div>
 			<div class="col-sm-8">
-			<center><h2>"Add new Organization Moderator"</h2></center><br />
-			<center><h3>Organization Moderator Information</h3></center><br />
-				<form action = "add_new_organization_moderator.php" method="POST">
+			<center><h2>"Update Organization Officer"</h2></center><br />
+			<center><h3>Organization Officer Information</h3></center><br />
+				<form action = "list_of_organization_officer.php" method="POST">
 				  <div class="form-row">
 				    <div class="col-md-4">
-				      <h6>Instructor ID#</h6><input type="text" class="form-control" name="instructor_id" placeholder="Instructor Id">
+				      <h6>ID#</h6>
+				      	<select name = "id_number" class="form-control">
+								  <option selected>Select Student</option>
+									<?php 
+										$query = "SELECT * FROM student";
+										$result = mysqli_query($db, $query); 
+										$count = mysqli_num_rows($result);
+										if($count = 1){
+											while ($row = mysqli_fetch_array($result)){
+									?>
+									<option value="<?php echo $row['id_number'] ?>" ><?php echo ucwords($row['first_name'] ." ". $row['middle_name'] ." ". $row['last_name']) ?></option>										
+									
+									<?php } 
+							  		}?>
+						</select>
 					</div>
 				    <div class="col-md-8">
-				      <h6>Lastname: </h6><input type="text" class="form-control" name= "last_name" placeholder="Enter last name">
-				    </div>
-					<div class="col-md-8">
-				      <h6>Firstname: </h6><input type="text" class="form-control" name= "first_name" placeholder="Enter first name">
-				    </div>
-					<div class="col-md-8">
-				      <h6>M.I: </h6><input type="text" class="form-control" name= "middle_name" placeholder="Enter middle name">
+				      <h6>Position: </h6>
+				      	<select name = "position" class="form-control">
+								  <option selected>Select Position</option>
+									<option value="President">President</option>
+									<option value="Vice_president">Vice President</option>
+									<option value="Secretary">Secretaty</option>
+									<option value="Treasurer">Treasurer</option>
+									<option value="Auditor">Auditor</option>
+									<option value="P.I.O">P.I.O</option>
+									<option value="Muse">Muse</option>
+									<option value="Prince">Prince</option>
+
+						</select>
 				    </div>
 					<div class="col-md-8">
 				      <h6>Organization Code: </h6>
-				     	 <select name = "organization_code" class="form-control">
-								  <option selected>Select Organization</option>
+				      <select name = "organization_code" class="form-control">
+				     		 <option selected>Select Organization</option>
 									<?php 
 										$query = "SELECT * FROM organization";
 										$results = mysqli_query($db, $query); 
@@ -90,9 +128,11 @@
 										
 										<?php } 
 							  			}?>
-					  	</select>
-					  	<h6>Academic Year: </h6>
-				      	<select name = "academic_code" class="form-control">
+						</select>
+				    </div>
+					<div class="col-md-8">
+				      <h6>Academic Year: </h6>
+				      <select name = "academic_code" class="form-control">
 				     		 <option selected>Select Academic Year</option>
 									<?php 
 										$query = "SELECT * FROM academic_year";
@@ -110,9 +150,12 @@
 				  </div>
 				  <br />
 				  <div class="form-row">
-					  <div class="col-md-4">
-						<button type="reset" class="btn btn-secondary">Reset</button>
-						<button type="submit" class="btn btn-primary" name="save5" onclick="myFunction()">Save</button>
+					  <div class="col-md-4 text-center submit-data">
+					  <?php if ($update == true): ?>
+						<button type="submit" class="btn btn-secondary"  name="update6" style="background: red;">Update</button>
+					  <?php else: ?>
+						<button type="submit" class="btn btn-primary" name="save">Save</button>
+					  <?php endif ?>
 					  </div>
 				  </div>
 				</form>

@@ -3,7 +3,7 @@
 <html>
 <head>
 	<title>Supreme Student Council</title>
-	<link href = "css/stylesheet.css" rel = "stylesheet" type = "text/css" >
+	<link href="css/stylesheet.css" rel="stylesheet" type ="text/css" >
 	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 	<script type="text/javascript" src="bootstrap/js/jquery-slim.min.js"></script>
 	<script type="text/javascript" src="bootstrap/js/popper.min.js"></script>

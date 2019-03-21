@@ -1,18 +1,17 @@
 <?php include('server.php'); 
 
-	if (isset($_GET['EDIT1'])) {
-		$id_number = $_GET['EDIT1'];
-		$update = true;
-		$record = mysqli_query($db, "SELECT * FROM student WHERE id_number='$id_number'");
 		
+	if (isset($_GET['edit8'])) {
+		$id_number = $_GET['edit8'];
+		$update = true;
+		$record = mysqli_query($db, "SELECT * FROM section_officer WHERE id_number='$id_number'");
+		
+	
 			$n = mysqli_fetch_array($record);
-			$id_number = $n['id_number'];
-			$first_name = $n['first_name'];
-			$last_name = $n['last_name'];
-			$middle_name = $n['middle_name'];
-			$course_code = $n['course_code'];
-			$section_id = $n['section_id'];
-			$status = $n['status'];
+			$id_number = $n["id_number"];
+			$position = $n["position"];
+			$academic_code = $n["academic_code"];
+		
 	}	
 
 
@@ -66,8 +65,8 @@
 					<li><a href ="list_of_organization_member.php"><button type="button" class="btn btn-outline-dark">Organization Member</button></a></li>
 					<li><a href ="list_of_organization_officer.php"><button type="button" class="btn btn-outline-dark">Organization Officer</button></a></li>
 					<li><a href ="list_of_organization_moderator.php"><button type="button" class="btn btn-outline-dark">Organization Moderator</button></a></li>
-					<li><a href ="list_of_section_officer.php"><button type="button" class="btn btn-outline-dark">Section Officer</button></a></li>
-					<li><a href ="list_of_acad_year.php"><button type="button" class="btn btn-outline-dark">Academic Year</button></a></li>		
+					<li><a href ="list_of_section_officer.php"><button type="button" class="btn btn-outline-dark">Section Officer</button></a></li>	
+					<li><a href ="list_of_acad_year.php"><button type="button" class="btn btn-outline-dark">Academic Year</button></a></li>			
 				</ul>
 				</div>
 			</div>
@@ -77,47 +76,61 @@
 				</div>
 			</div>
 			<div class="col-sm-8">
-			<center><h2>"Update student"</h2></center><br />
-			<center><h3>Student Information</h3></center><br />
-				<form action="list_of_student.php" method="POST">
-				  <div class="form-row">
-				    <div class="col-md-2">
-				      <h6>ID #: </h6><input type="text" class="form-control"  value="<?php echo $id_number; ?>" name="id_number" readonly>
-				    </div>
-				    <div class="col-md-4">
-				      <h6>First Name: </h6><input type="text" class="form-control"  value="<?php echo $first_name; ?>" name="first_name">
-				    </div>
-				    <div class="col-md-4">
-				      <h6>Last Name: </h6><input type="text" class="form-control"  value="<?php echo $last_name; ?>" name="last_name">
-				    </div>
-				    <div class="col-md-2">
-				      <h6>Middle Initial: </h6><input type="text" class="form-control"  value="<?php echo $middle_name; ?>" name="middle_name">
-				    </div>
-				  </div>
-				  <br />
+			<center><h2>"Update Section Officer"</h2></center><br />
+			<center><h3>Section Officer Information</h3></center><br />
+				<form action = "list_of_section_officer.php" method="POST">
 				  <div class="form-row">
 				    <div class="col-md-4">
-				      <h6>Course code: </h6>
-				      <select name = "course_code" class="form-control" required>
-					  <option selected>Select Course Name</option>
-						<?php 
-							$query = "SELECT * FROM program";
-							$results = mysqli_query($db, $query); 
-							$count = mysqli_num_rows($results);
-							if($count = 1){
-								while ($row = mysqli_fetch_array($results)){
-						?>
-								<option value = "<?php echo $row['course_code'] ?>"><?php echo $row['course_name']?></option>
-							
-							<?php } 
-				  			}?>
-					  </select>
+				      <h6>ID#</h6>
+				      	<select name = "id_number" class="form-control">
+								  <option selected>Select Student</option>
+									<?php 
+										$query = "SELECT * FROM student";
+										$result = mysqli_query($db, $query); 
+										$count = mysqli_num_rows($result);
+										if($count = 1){
+											while ($row = mysqli_fetch_array($result)){
+									?>
+									<option value="<?php echo $row['id_number'] ?>" ><?php echo ucwords($row['first_name'] ." ". $row['middle_name'] ." ". $row['last_name']) ?></option>										
+									
+									<?php } 
+							  		}?>
+						</select>
+					</div>
+				    <div class="col-md-8">
+				      <h6>Position: </h6>
+				      <select name = "position" class="form-control">
+								  <option selected>Select Position</option>
+									<option value="President">President</option>
+									<option value="Vice_president">Vice President</option>
+									<option value="Vecretary">Secretary</option>
+									<option value="Treasurer">Treasurer</option>
+									<option value="Auditor">Auditor</option>
+									<option value="P.I.O">P.I.O</option>
+									<option value="Muse">Muse</option>
+									<option value="Prince">Prince</option>
+
+						</select>
 				    </div>
-				   </div>
-				    <div class="form-row">
-					    <div class="col-md-4">
-					      <h6>Section: </h6>
-					      <select name = "section_id" class="form-control">
+					<div class="col-md-8">
+				      <h6>Academic Year: </h6>
+				      	<select name = "academic_code" class="form-control">
+				     		 <option selected>Select Academic Year</option>
+									<?php 
+										$query = "SELECT * FROM academic_year";
+										$results = mysqli_query($db, $query); 
+										$count = mysqli_num_rows($results);
+										if($count = 1){
+											while ($row = mysqli_fetch_array($results)){
+									?>
+											<option value = "<?php echo $row['academic_code'] ?>"><?php echo $row['acad_year']." "."(".$row['semester'].")" ?></option>
+										
+										<?php } 
+							  			}?>
+						</select>
+
+					  <h6>Section:</h6>
+						  <select name = "section_id" class="form-control">
 						  <option selected>Select Section</option>
 							<?php 
 								$query = "SELECT * FROM section";
@@ -131,24 +144,26 @@
 								<?php } 
 					  			}?>
 						  </select>	
-					    </div>
-					    <div class="col-md-4">
-					      <h6>Status: </h6><input type="text" class="form-control" value="<?php echo $status; ?>" name="status">
-					    </div>
 				    </div>
-				    <br />
-						  <div class="form-row">
-							  <div class="col-md-6">
-									<?php if ($update == true): ?>
-										<button type="submit" class="btn btn-secondary" name="UPDATE1" style="background: red;">Update</button>
-									  <?php else: ?>
-										<button type="submit" class="btn btn-primary" name="save">Save</button>
-									 <?php endif ?>
-							  </div>
-						  </div>
-					</form>
+				  </div>
+				  <br />
+				  <div class="form-row">
+					  <div class="col-md-4">
+						<?php if ($update == true): ?>
+							<button type="submit" class="btn btn-secondary"  name="EDIT8" style="background: red;">Update</button>
+						  <?php else: ?>
+							<button type="submit" class="btn btn-primary" name="save">Save</button>
+						 <?php endif ?>
+					  </div>
+				  </div>
+				</form>
 			</div>
 		</div>
 	</div>
+<script>
+function myFunction() {
+  confirm("Successfully Save!");
+}
+</script>
 </body>
 </html>
