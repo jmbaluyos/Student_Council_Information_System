@@ -4,14 +4,12 @@
 	if (isset($_GET['edit8'])) {
 		$id_number = $_GET['edit8'];
 		$update = true;
-		$record = mysqli_query($db, "SELECT * FROM section_officer WHERE id_number='$id_number'");
+		$sql = "SELECT * FROM section_officer,academic_year WHERE section_officer.academic_code = academic_year.academic_code AND id_number='$id_number'";
+		$record2 = mysqli_query($db, $sql);	
+
+		
 		
 	
-			$n = mysqli_fetch_array($record);
-			$id_number = $n["id_number"];
-			$position = $n["position"];
-			$academic_code = $n["academic_code"];
-		
 	}	
 
 
@@ -42,7 +40,7 @@
 		      <li class="nav-item active">
 		      </li>
 		    </ul>
-		    	</center><p style="color:white; font-size: 50px; margin-right: 400px;">Supreme Student Council<strong></strong></p>
+		    	<center><p style="color:white; font-size: 50px; margin-right: 400px;">Supreme Student Council</p></center>
 		    	<a href="logout.php">Logout</a> 
 		  </div>
 		</nav>
@@ -79,31 +77,23 @@
 			<center><h2>"Update Section Officer"</h2></center><br />
 			<center><h3>Section Officer Information</h3></center><br />
 				<form action = "list_of_section_officer.php" method="POST">
+					<?php if(mysqli_num_rows($record2)){
+						  		while ($row1 = mysqli_fetch_array($record2)){
+						  			
+						  		
+					?>
 				  <div class="form-row">
 				    <div class="col-md-4">
-				      <h6>ID#</h6>
-				      	<select name = "id_number" class="form-control">
-								  <option selected>Select Student</option>
-									<?php 
-										$query = "SELECT * FROM student";
-										$result = mysqli_query($db, $query); 
-										$count = mysqli_num_rows($result);
-										if($count = 1){
-											while ($row = mysqli_fetch_array($result)){
-									?>
-									<option value="<?php echo $row['id_number'] ?>" ><?php echo ucwords($row['first_name'] ." ". $row['middle_name'] ." ". $row['last_name']) ?></option>										
-									
-									<?php } 
-							  		}?>
-						</select>
+				      <h6>Student ID#</h6><input type="text" class="form-control" value="<?php echo $id_number; ?>"  name="id_number" placeholder="Instructor Id" readonly>
 					</div>
 				    <div class="col-md-8">
 				      <h6>Position: </h6>
 				      <select name = "position" class="form-control">
-								  <option selected>Select Position</option>
+				      		
+									<option value = "<?php echo $row1['position']; ?>"<?php if($row1['position'] == $row1['position']);?> ><?php echo $row1['position']; echo " "."(Selected)"?></option>
 									<option value="President">President</option>
-									<option value="Vice_president">Vice President</option>
-									<option value="Vecretary">Secretary</option>
+									<option value="Vice President">Vice President</option>
+									<option value="Secretary">Secretary</option>
 									<option value="Treasurer">Treasurer</option>
 									<option value="Auditor">Auditor</option>
 									<option value="P.I.O">P.I.O</option>
@@ -115,35 +105,34 @@
 					<div class="col-md-8">
 				      <h6>Academic Year: </h6>
 				      	<select name = "academic_code" class="form-control">
-				     		 <option selected>Select Academic Year</option>
 									<?php 
 										$query = "SELECT * FROM academic_year";
 										$results = mysqli_query($db, $query); 
-										$count = mysqli_num_rows($results);
-										if($count = 1){
-											while ($row = mysqli_fetch_array($results)){
+										if(mysqli_num_rows($results)){
+											while ($row2 = mysqli_fetch_array($results)){
 									?>
-											<option value = "<?php echo $row['academic_code'] ?>"><?php echo $row['acad_year']." "."(".$row['semester'].")" ?></option>
+											<option value = "<?php echo $row2['academic_code'] ?>"<?php if($row1['academic_code'] == $row2['academic_code']); echo "selected";?> ><?php echo $row2['acad_year']." "."(".$row2['semester'].")" ?></option>
 										
-										<?php } 
-							  			}?>
+									<?php } 
+							  		}?>
 						</select>
-
+						
 					  <h6>Section:</h6>
 						  <select name = "section_id" class="form-control">
-						  <option selected>Select Section</option>
 							<?php 
-								$query = "SELECT * FROM section";
-								$result = mysqli_query($db, $query); 
-								$count = mysqli_num_rows($result);
-								if($count = 1){
-									while ($row = mysqli_fetch_array($result)){
+								$query =  "SELECT * FROM section"; 
+								$record1 = mysqli_query($db, $query);
+								if(mysqli_num_rows($record1)){
+									while ($row = mysqli_fetch_array($record1)){
 							?>
-									<option value = "<?php echo $row['section_id'] ?>"><?php echo $row['section_id']?></option>
+
+									<option value = "<?php echo $row1['section_id']; ?>"<?php if($row1['section_id'] == $row['section_id']); echo "Selected";?> ><?php echo $row['section_id']; ?></option>
 								
 								<?php } 
 					  			}?>
 						  </select>	
+						<?php }
+						}?>
 				    </div>
 				  </div>
 				  <br />
@@ -153,7 +142,7 @@
 							<button type="submit" class="btn btn-secondary"  name="EDIT8" style="background: red;">Update</button>
 						  <?php else: ?>
 							<button type="submit" class="btn btn-primary" name="save">Save</button>
-						 <?php endif ?>
+						<?php endif ?>
 					  </div>
 				  </div>
 				</form>

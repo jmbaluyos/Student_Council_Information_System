@@ -40,7 +40,7 @@
 		      <li class="nav-item active">
 		      </li>
 		    </ul>
-		    	</center><p style="color:white; font-size: 50px; margin-right: 400px;">Supreme Student Council<strong></strong></p>
+		    	<center><p style="color:white; font-size: 50px; margin-right: 400px;">Supreme Student Council</p></center>
 		    	<a href="logout.php">Logout</a> 
 		  </div>
 		</nav>
@@ -100,7 +100,7 @@
 							if($count = 1){
 								while ($row = mysqli_fetch_array($results)){
 						?>
-								<option value = "<?php echo $row['id_number'] ?>"><?php echo $row['last_name']." ".$row['first_name']." ".$row['middle_name']?></option>
+								<option value = "<?php echo $row['id_number'] ?>"><?php echo ucwords($row['last_name']." ".$row['first_name']." ".$row['middle_name'])?></option>
 							
 							<?php } 
 				  			}?>

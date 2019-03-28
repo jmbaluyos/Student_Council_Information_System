@@ -43,7 +43,7 @@
 		      <li class="nav-item active">
 		      </li>
 		    </ul>
-		    	</center><p style="color:white; font-size: 50px; margin-right: 400px;">Supreme Student Council<strong></strong></p>
+		    	<center><p style="color:white; font-size: 50px; margin-right: 400px;">Supreme Student Council</p></center>
 		    	<a href="logout.php">Logout</a> 
 		  </div>
 		</nav>
@@ -133,7 +133,13 @@
 						  </select>	
 					    </div>
 					    <div class="col-md-4">
-					      <h6>Status: </h6><input type="text" class="form-control" value="<?php echo $status; ?>" name="status">
+					      <h6>Status: </h6>
+						      <select name="status" class="form-control">
+						      	<option value="Currently Enrolled">Currently Enrolled</option>
+						      	<option value="Dropped">Dropped</option>
+						      	<option value="Culled">Culled</option>
+
+						      </select>
 					    </div>
 				    </div>
 				    <br />

@@ -13,6 +13,7 @@
 		<link href = "css/style.css" rel = "stylesheet" type = "text/css" >
 </head>
 <body>
+
 	<!-- Header Area -->
 	<div class="container-fluid">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -25,7 +26,7 @@
 		      <li class="nav-item active">
 		      </li>
 		    </ul>
-		    	</center><p style="color:white; font-size: 50px; margin-right: 400px;">Supreme Student Council<strong></strong></p>
+		    	<center><p style="color:white; font-size: 50px; margin-right: 400px;">Supreme Student Council</p></center>
 		    	<a href="logout.php">Logout</a> 
 		  </div>
 		</nav>
@@ -73,7 +74,7 @@
 				      <td><?php echo $row['penalty']?></td>
 				      <td>		 
 						<button type="button" class="btn btn-outline-info btn-sm fa fa-pencil"><a href="update_fines.php?EDIT3=<?php echo $row['id_number']; ?>"> Edit </a></button> 
-
+						<button type="button" class="btn btn-outline-info btn-sm fa fa-book"><a href="update_payment.php?EDIT_4=<?php echo $row['id_number']; ?>"> Payment </a></button> 
 						<button type="button" class="btn btn-outline-danger btn-sm fa fa-trash" data-toggle="modal" data-target="#exampleModal">Delete</button>
 
 							<!-- Modal -->

@@ -25,7 +25,7 @@
 		      <li class="nav-item active">
 		      </li>
 		    </ul>
-		    	</center><p style="color:white; font-size: 50px; margin-right: 400px;">Supreme Student Council<strong></strong></p>
+		    	<center><p style="color:white; font-size: 50px; margin-right: 400px;">Supreme Student Council</p></center>
 		    	<a href="logout.php">Logout</a> 
 		  </div>
 		</nav>
@@ -75,23 +75,25 @@
 			<center><h3>Academic Year Information</h3></center><br />
 				<form action="add_new_acad_year.php" method="POST">
 				  <div class="form-row">
-				    <div class="col-md-4">
-				      <h6>Academic Code: </h6><input type="text" class="form-control" name="academic_code" placeholder="Academic Code">
-				 	</div>
-				    <div class="col-md-8">
+				    <div class="col-md-6">
 				      <h6>Academic Year: </h6><input type="text" class="form-control" name="acad_year" placeholder="Academic Year">
 				    </div>
-				  </div>
-				  <div class = "form-row">
-				  	<div class = "col-md-4">
-				  	 <h6>Semester: </h6><input type="text" class="form-control" name="semester" placeholder="Semester">
+				  	<div class = "col-md-6">
+				  	 <h6>Semester: </h6>
+				  	 <select class="form-control" name="semester">
+				  	 	<option selected>Select Semester</option>
+				  	 	<option value="First Semester">First Semester</option>
+				  	 	<option value="Second Semester">Second Semester</option>
+				  	 	<option value="Summer">Summer</option>
+				  	 </select>
 				  	</div>
 				  </div>
 				  <br />
 				  <div class="form-row">
 					  <div class="col-md-4">
-						<button type="reset" class="btn btn-secondary">Reset</button>
-						<button type="submit" class="btn btn-primary" name="Save3" onclick="myFunction()">Save</button>
+						  	<a href="list_of_acad_year.php"><button type="button" class="btn btn-warning">Done</button></a>
+							<button type="reset" class="btn btn-secondary">Reset</button>
+							<button type="submit" class="btn btn-primary" name="Save3" onclick="myFunction()">Save</button>
 					  </div>
 				  </div>
 				</form>

@@ -25,7 +25,7 @@
 		      <li class="nav-item active">
 		      </li>
 		    </ul>
-		    	</center><p style="color:white; font-size: 50px; margin-right: 400px;">Supreme Student Council<strong></strong></p>
+		    	<center><p style="color:white; font-size: 50px; margin-right: 400px;">Supreme Student Council</p></center>
 		    	<a href="logout.php">Logout</a> 
 		  </div>
 		</nav>
@@ -61,7 +61,7 @@
 			<div class="col-sm-8">
 			<center><h2>"Add new Event"</h2></center><br />
 			<center><h3>Event Information</h3></center><br />
-				<form action="list_of_event.php" method="POST">
+				<form action="add_new_event.php" method="POST">
 				  <div class="form-row">
 				    <div class="col-md-4">
 				      <h6>Event Code: </h6><input type="text" class="form-control" name="event_code" placeholder="Event Code">
@@ -78,6 +78,7 @@
 				  <br />
 				  <div class="form-row">
 					  <div class="col-md-4">
+					  	<a href="list_of_event.php"><button type="button" class="btn btn-warning">Done</button></a>
 						<button type="reset" class="btn btn-secondary">Reset</button>
 						<button type="submit" class="btn btn-primary" name="save2" onclick="myFunction()">Save</button>
 					  </div>

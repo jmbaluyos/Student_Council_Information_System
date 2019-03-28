@@ -25,7 +25,7 @@
 		      <li class="nav-item active">
 		      </li>
 		    </ul>
-		    	</center><p style="color:white; font-size: 50px; margin-right: 400px;">Supreme Student Council<strong></strong></p>
+		    	<center><p style="color:white; font-size: 50px; margin-right: 400px;">Supreme Student Council</p></center>
 		    	<a href="logout.php">Logout</a> 
 		  </div>
 		</nav>
@@ -37,28 +37,28 @@
 			<div class="col-sm-2" >
 				<div class="btn-group-vertical">
 				<ul style="list-style: none;">
-					<li><a href = "list_of_student.php"><button type="button" class="btn btn-dark">List of Student</button></a></li>
-					<br />
+					<li><a href = "list_of_student.php"><button type="button" class="btn btn-outline-dark">List of Student</button></a></li>
+					
 					<li><a href ="list_of_organization.php"><button type="button" class="btn btn-outline-dark">Organization</button></a></li>
-					<br />
+					
 					<li><a href ="list_of_section.php"><button type="button" class="btn btn-outline-dark">Sections</button></a></li>
-					<br />
+					
 					<li><a href ="list_of_department.php"><button type="button" class="btn btn-outline-dark">Departments</button></a></li>
-					<br />
+					
 					<li><a href ="list_of_program.php"><button type="button" class="btn btn-outline-dark">Program</button></a></li>
-					<br />
+					
 					<li><a href ="list_of_event.php"><button type="button" class="btn btn-outline-dark">Events</button></a></li>
-					<br />
+					
 					<li><a href ="fines.php"><button type="button" class="btn btn-outline-dark">Fines</button></a></li>
-					<br />
+					
 					<li><a href ="payment.php"><button type="button" class="btn btn-outline-dark">Payment</button></a></li>
-					<br />
+					
 					<li><a href ="list_of_organization_member.php"><button type="button" class="btn btn-outline-dark">Organization Member</button></a></li>
-					<br />
+					
 					<li><a href ="list_of_organization_officer.php"><button type="button" class="btn btn-outline-dark">Organization Officer</button></a></li>
-					<br />
+					
 					<li><a href ="list_of_organization_moderator.php"><button type="button" class="btn btn-outline-dark">Organization Moderator</button></a></li>
-					<br />
+					
 					<li><a href ="list_of_section_officer.php"><button type="button" class="btn btn-outline-dark">Section Officer</button></a></li>	
 					<li><a href ="list_of_acad_year.php"><button type="button" class="btn btn-outline-dark">Academic Year</button></a></li>		
 				</ul>
@@ -72,7 +72,7 @@
 			<div class="col-sm-8">
 			<center><h2>"Add new student"</h2></center><br />
 			<center><h3>Student Information</h3></center><br />
-				<form action="list_of_student.php" method = "POST">
+				<form action="add_new_student.php" method = "POST">
 				  <div class="form-row">
 					<div class="col-md-2">
 				      <h6>ID Number: </h6><input type="text" class="form-control" name = "id_number" placeholder="ID Number">
@@ -89,7 +89,7 @@
 				  </div>
 				  <br />
 				  <div class="form-row">
-				    <div class="col-md-4">
+				    <div class="col-md-8">
 				      <h6>Course code: </h6>
 					  <select name = "course_code" class="form-control">
 					  <option selected>Select Course Name</option>
@@ -126,12 +126,21 @@
 					  </select>		  
 					</div>
 				    <div class="col-md-4">
-				      <h6>Status: </h6><input type="text" class="form-control" name = "status" placeholder="Status">
+				      <h6>Status: </h6>
+				      <select name="status" class="form-control">
+
+				      	<option selected>Select Status</option>
+				      	<option value="Currently Enrolled">Currently Enrolled</option>
+				      	<option value="Dropped">Dropped</option>
+				      	<option value="Culled">Culled</option>
+
+				      </select>
 				    </div>
 				  </div>
 				  <br />
 				  <div class="form-row">
 					  <div class="col-md-6">
+					  	<a href="list_of_student.php"><button type="button" class="btn btn-warning">Done</button></a>
 						<button type="reset" class="btn btn-secondary">Reset</button>
 						<button type="submit" class="btn btn-primary" name="SAVE" onclick="myFunction()">Save</button>
 					  </div>

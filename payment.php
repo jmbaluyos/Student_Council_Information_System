@@ -1,4 +1,9 @@
-<?php include('server.php'); ?>
+<?php include('server.php'); 
+	
+		/*$sql = "SELECT * FROM payment,student WHERE payment.id_number = student.id_number";
+		$record2 = mysqli_query($db, $sql);	*/
+
+?>
 
 
 <!DOCTYPE html>
@@ -25,7 +30,7 @@
 		      <li class="nav-item active">
 		      </li>
 		    </ul>
-		    	</center><p style="color:white; font-size: 50px; margin-right: 400px;">Supreme Student Council<strong></strong></p>
+		    	<center><p style="color:white; font-size: 50px; margin-right: 400px;">Supreme Student Council</p></center>
 		    	<a href="logout.php">Logout</a> 
 		  </div>
 		</nav>
@@ -52,14 +57,12 @@
 				</div>
 				<br /><br />
 				<center><h3>Payment Information</h3></center><br />
-				<?php $results = mysqli_query($db, "SELECT * FROM fines,student  WHERE fines.id_number = student.id_number"); ?>
+				<?php $results = mysqli_query($db, "SELECT payment.amount,payment.balance,payment.status,payment.date,fines.id_number as id FROM fines,payment,student WHERE fines.id_number=payment.id_number AND student.id_number=payment.id_number GROUP BY student.id_number"); ?>
 				<table class="table table-primary">
 				  <thead class="thead-dark">
 				    <tr>
 				      <th scope="col">ID #</th>
-				      <th scope="col">Names</th>
-				      <th scope="col">Event code</th>
-				      <th scope="col">Penalty</th>
+				      <!-- <th scope="col">Names</th> -->
 				      <th scope="col">Amount</th>
 				      <th scope="col">Status</th>
 				      <th scope="col">Balance</th>
@@ -70,17 +73,16 @@
 				  <?php while ($row = mysqli_fetch_array($results)){ ?>
 				  <tbody>
 				    <tr>
-				      <td><?php echo $row['id_number']?></td>
-				      <td><?php echo ucwords($row['last_name']." ".$row['first_name']." ".$row['middle_name'])?></td>
-				      <td><?php echo $row['event_code']?></td>
-				      <td><?php echo $row['penalty']?></td>
-				      <td></td>
-				      <td></td>
-				      <td></td>
-				      <td></td>
+				      <td><?php echo ucwords($row['id'])?></td>
+				    <!-- <?php while ($row1 = mysqli_fetch_array($record2)){ ?>
+				   	  <td><?php echo ucwords($row1['last_name']." ".$row1['first_name']." ".$row1['middle_name'])?></td>
+				   	<?php }?> -->
+				      <td><?php echo $row['amount']?></td>
+				      <td><?php echo $row['status']?></td>
+				      <td><?php echo $row['balance']?></td>
+				      <td><?php echo $row['date']?> </td>
+				    
 				      <td>
-				      	<button type="button" class="btn btn-outline-info btn-sm fa fa-pencil"><a href="update_payment.php?EDIT_4=<?php echo $row['id_number']; ?>"> Update </a></button> 
-
 						<button type="button" class="btn btn-outline-danger btn-sm fa fa-trash" data-toggle="modal" data-target="#exampleModal">Delete</button>
 
 							<!-- Modal -->
@@ -94,7 +96,7 @@
 							        </button>
 							      </div>
 							      <div class="modal-body">
-							        Ooopss!! Im sorry but you can't Delete this data!
+							        Ooopss!! Im sorry but you can't Delete this record!
 							      </div>
 							      <div class="modal-footer">
 							        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">OK</button>

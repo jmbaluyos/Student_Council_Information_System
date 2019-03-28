@@ -25,7 +25,7 @@
 		      <li class="nav-item active">
 		      </li>
 		    </ul>
-		    	</center><p style="color:white; font-size: 50px; margin-right: 400px;">Supreme Student Council<strong></strong></p>
+		    	<center><p style="color:white; font-size: 50px; margin-right: 400px;">Supreme Student Council</p></center>
 		    	<a href="logout.php">Logout</a> 
 		  </div>
 		</nav>
@@ -133,6 +133,7 @@
 				  <br />
 				  <div class="form-row">
 					  <div class="col-md-4">
+					  	<a href="list_of_organization_officer.php"><button type="button" class="btn btn-warning">Done</button></a>
 						<button type="reset" class="btn btn-secondary">Reset</button>
 						<button type="submit" class="btn btn-primary" name="save6" onclick="myFunction()">Save</button>
 					  </div>

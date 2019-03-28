@@ -13,6 +13,7 @@
 		<link href = "css/style.css" rel = "stylesheet" type = "text/css" >
 </head>
 <body>
+
 	<!-- Header Area -->
 	<div class="container-fluid">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -25,7 +26,7 @@
 		      <li class="nav-item active">
 		      </li>
 		    </ul>
-		    	</center><p style="color:white; font-size: 50px; margin-right: 400px;">Supreme Student Council<strong></strong></p>
+		    	<center><p style="color:white; font-size: 50px; margin-right: 400px;">Supreme Student Council</p></center>
 		    	<a href="logout.php">Logout</a>
 		  </div>
 		</nav>
@@ -50,28 +51,30 @@
 					<a href ="list_of_acad_year.php"><button type="button" class="btn btn-outline-dark">Academic Year</button></a>	
 				
 				</div>
+				<hr />
 				<br /><br />
 				<a href = "add_new_section_officer.php"><span style="float: left; font-size: 50px; margin-right: 50px;"><i class="fa fa-plus-circle" font-size = "50px"></i></span></a>
 				<center><h3>List of Section Officer</h3></center><br />
-				<?php $results = mysqli_query($db, "SELECT * FROM section_officer,student,academic_year WHERE student.id_number=section_officer.id_number AND section_officer.academic_code=academic_year.academic_code"); ?>
+				<?php $results = mysqli_query($db, "SELECT * FROM section_officer,academic_year,student WHERE section_officer.academic_code=academic_year.academic_code AND section_officer.id_number=student.id_number"); ?>
 				<table class="table table-primary">
 				  <thead class="thead-dark">
 				    <tr>
 				      <th scope="col">ID#</th>
+				      <th scope="col">Names:</th>
 				      <th scope="col">Section</th>
 				      <th scope="col">Position</th>
-					  <th scope="col">Academic Year</th>
+ 					  <th scope="col">Academic Year</th>
 				      <th scope="col">Action</th>
 				    </tr>
 				  </thead>
 				  <?php while ($row = mysqli_fetch_array($results)){ ?>
 				  <tbody>
 				    <tr>
-							
+							<td><?php echo $row['id_number'];?></td>
 							<td><?php echo ucwords($row['last_name']." ".$row['first_name']." ".$row['middle_name'])?></td>
-							<td><?php echo $row['section_id']?></td>
-							<td><?php echo $row['position']?></td>
-							<td><?php echo $row['acad_year']." "."(".$row['semester'].")" ?></td>
+							<td><?php echo $row['section_id'];?></td>
+							<td><?php echo $row['position'];?></td>
+						 	<td><?php echo $row['acad_year']." "."(".$row['semester'].")"; ?></td>
 							
 							<td>
 			 

@@ -25,7 +25,7 @@
 		      <li class="nav-item active">
 		      </li>
 		    </ul>
-		    	<p style="color:white; font-size: 50px; margin-right: 400px;">Supreme Student Council</p>
+		    	<center><p style="color:white; font-size: 50px; margin-right: 400px;">Supreme Student Council</p></center>
 		    	<a href="logout.php">Logout</a> 
 		  </div>
 		</nav>
@@ -93,7 +93,7 @@
 										if($count = 1){
 											while ($row = mysqli_fetch_array($result)){
 									?>
-											<option value="<?php echo $row['id_number'] ?>" ><?php echo ucwords($row['first_name'] ." ". $row['middle_name'] ." ". $row['last_name']) ?></option>										
+											<option value="<?php echo $row['id_number'] ?>" ><?php echo ucwords("(".$row['id_number'].")"." ".$row['first_name'] ." ". $row['middle_name'] ." ". $row['last_name']) ?></option>										
 										<?php } 
 							  			}?>
 								</select>
@@ -110,8 +110,8 @@
 									?>
 											<option value = "<?php echo $row['event_code'] ?>"><?php echo $row['event_name'] ?></option>
 										
-										<?php } 
-							  			}?>
+									<?php } 
+							  		}?>
 								</select>
 							</td>
 							<td><input type="text" class="form-control" name="penalty" placeholder="Penalty"></td>
@@ -122,6 +122,7 @@
 				  <br />
 				  <div class="form-row">
 					  <div class="col-md-4">
+					  	<a href="fines.php"><button type="button" class="btn btn-warning">Done</button></a>
 						<button type="reset" class="btn btn-secondary">Reset</button>
 						<button type="submit" class="btn btn-primary" name="save1" onclick="myFunction()">Save</button>
 					  </div>

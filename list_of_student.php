@@ -1,5 +1,47 @@
-<?php include('../SSC/server.php'); ?>
+<?php include('../SSC/server.php'); 
+	
+	if(isset($_POST['search'])){
+		
+		 $id_number = $_POST['id_number'];
+		 $query = "SELECT `id_number`, `first_name`, `last_name`, `middle_name`, `course_code`, `section_id` FROM `student` WHERE `id_number` = $id_number LIMIT 1";
+		 $result = mysqli_query($db, $query);		
 
+		  if(mysqli_num_rows($result) > 0)
+		    {
+		      while ($row = mysqli_fetch_array($result))
+		      {
+		        $id_number = $row['id_number'];
+		        $first_name = $row['first_name'];
+		        $last_name = $row['last_name'];
+		        $middle_name = $row['middle_name'];
+		        $course_code = $row['course_code'];
+		        $section_id = $row['section_id'];
+		      }  
+		    }
+		   else {
+       	 	echo "Undifined ID";
+            $id_number = "";
+            $first_name = "";
+            $last_name = "";
+            $middle_name = "";
+            $course_code = "";
+            $section_id = "";
+			    }	    
+			    mysqli_free_result($db);
+			    mysqli_close($db);
+			    
+			}
+			else{
+    		$id_number = "";
+            $first_name = "";
+            $last_name = "";
+            $middle_name = "";
+            $course_code = "";
+            $section_id = "";
+	}
+
+
+?>
 
 <!DOCTYPE html>
 <html>
@@ -13,6 +55,7 @@
 		<link href = "css/style.css" rel = "stylesheet" type = "text/css" >
 </head>
 <body>
+
 	<!-- Header Area -->
 	<div class="container-fluid">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -25,7 +68,7 @@
 		      <li class="nav-item active">
 		      </li>
 		    </ul>
-		    	</center><p style="color:white; font-size: 50px; margin-right: 400px;">Supreme Student Council<strong></strong></p>
+		    	<center><p style="color:white; font-size: 50px; margin-right: 400px;">Supreme Student Council</p></center>
 		    	<a href="logout.php">Logout</a>
 		  </div>
 		</nav>
@@ -50,12 +93,12 @@
 					<a href ="list_of_acad_year.php"><button type="button" class="btn btn-outline-dark">Academic Year</button></a>	
 				
 				</div>
-				
-				<br /><br />
+				<hr />
+				<br />
 				<a href = "add_new_student.php"><span style="float: left; font-size: 50px; margin-right: 50px;"><i class="fa fa-plus-circle" font-size = "50px"></i></span></a>
 				<center><h3>List of student</h3></center>
 				<br />
-				<?php $results = mysqli_query($db, "SELECT * FROM student,program  WHERE student.course_code = program.course_code"); ?>
+				<?php $results = mysqli_query($db, "SELECT * FROM student,program  WHERE student.course_code = program.course_code GROUP BY last_name"); ?>
 				<table class="table table-primary">
 				  <thead class="thead-dark">
 				    <tr>
@@ -73,12 +116,12 @@
 				  <tbody>
 				    <tr>
 				      <td><?php echo $row['id_number']?></td>
-				      <td><?php echo $row['first_name']?></td>
-				      <td><?php echo $row['last_name']?></td>
-				      <td><?php echo $row['middle_name']?></td>
+				      <td><?php echo ucwords($row['first_name'])?></td>
+				      <td><?php echo ucwords($row['last_name'])?></td>
+				      <td><?php echo ucwords($row['middle_name'])?></td>
 				      <td><?php echo $row['course_code']?></td>
 				      <td><?php echo $row['section_id']?></td>
-					  <td><?php echo $row['status']?></td>
+					  <td><?php echo ucwords($row['status'])?></td>
 				      <td>		 
 						<button type="button" class="btn btn-outline-info btn-sm fa fa-pencil"><a href="update_student.php?EDIT1=<?php echo $row['id_number']; ?>"> Edit </a></button> 
 

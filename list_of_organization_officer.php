@@ -25,7 +25,7 @@
 		      <li class="nav-item active">
 		      </li>
 		    </ul>
-		    	</center><p style="color:white; font-size: 50px; margin-right: 400px;">Supreme Student Council<strong></strong></p>
+		    	<center><p style="color:white; font-size: 50px; margin-right: 400px;">Supreme Student Council</p></center>
 		    	<a href="logout.php">Logout</a>
 		  </div>
 		</nav>
@@ -50,6 +50,7 @@
 					<a href ="list_of_acad_year.php"><button type="button" class="btn btn-outline-dark">Academic Year</button></a>	
 				
 				</div>
+				<hr />
 				<br /><br />
 				<a href = "add_new_organization_officer.php"><span style="float: left; font-size: 50px; margin-right: 50px;"><i class="fa fa-plus-circle" font-size = "50px"></i></span></a>
 				<center><h3>List of Organization Officer</h3></center><br />
@@ -57,7 +58,7 @@
 				<table class="table table-primary">
 				  <thead class="thead-dark">
 				    <tr>
-				      <th scope="col">Members</th>
+				      <th scope="col">Names</th>
 				      <th scope="col">Position</th>
 				      <th scope="col">Organization code</th>
 					  <th scope="col">Academic Year</th>

@@ -1,4 +1,7 @@
-<?php include ('server.php'); ?>
+<?php include ('server.php');
+ 
+
+ ?>
 
 
 <!DOCTYPE html>
@@ -25,8 +28,8 @@
 		      <li class="nav-item active">
 		      </li>
 		    </ul>
-		    	</center><p style="color:white; font-size: 50px; margin-right: 400px;">Supreme Student Council<strong></strong></p>
-		    	 <a href="logout.php">Logout</a> 
+		    	<center><p style="color:white; font-size: 50px; margin-right: 400px;">Supreme Student Council</p></center>
+		    	 <a href="logout.php">Logout</a>
 		  </div>
 		</nav>
 	</div>

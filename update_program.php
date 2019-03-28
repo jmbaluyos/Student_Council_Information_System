@@ -3,13 +3,10 @@
 	if (isset($_GET['edit'])) {
 		$course_code = $_GET['edit'];
 		$update = true;
-		$record = mysqli_query($db, "SELECT * FROM program WHERE course_code='$course_code'");
+		$record = mysqli_query($db, "SELECT * FROM department,program WHERE department.department_code=program.department_code AND course_code='$course_code'");
 		
 	
-			$n = mysqli_fetch_array($record);
-			$course_code = $n['course_code'];
-			$course_name = $n['course_name'];
-			$department_code = $n['department_code'];
+			
 		
 	}	
 
@@ -41,7 +38,7 @@
 		      <li class="nav-item active">
 		      </li>
 		    </ul>
-		    	</center><p style="color:white; font-size: 50px; margin-right: 400px;">Supreme Student Council<strong></strong></p>
+		    	<center><p style="color:white; font-size: 50px; margin-right: 400px;">Supreme Student Council</p></center>
 		    	<a href="logout.php">Logout</a> 
 		  </div>
 		</nav>
@@ -78,12 +75,17 @@
 			<center><h2>"Update Program"</h2></center><br />
 			<center><h3>Program Information</h3></center><br />
 				<form action="list_of_program.php" method="POST">
+					<?php if(mysqli_num_rows($record)){
+						  		while ($row1 = mysqli_fetch_array($record)){
+						  			
+						  		
+					?>
 				  <div class="form-row">
 				    <div class="col-md-4">
-				      <h6>Course Code: </h6><input type="text" class="form-control" value = "<?php echo $course_code; ?>" name="course_code" placeholder="Department Code" readonly>
+				      <h6>Course Code: </h6><input type="text" class="form-control" value = "<?php echo $row1['course_code']; ?>" name="course_code" placeholder="Department Code" readonly>
 				  	</div>
 				    <div class="col-md-8">
-				      <h6>Course Name: </h6><input type="text" class="form-control" value="<?php echo $course_name; ?>" name="course_name" placeholder="Department Name">
+				      <h6>Course Name: </h6><input type="text" class="form-control" value="<?php echo $row1['course_name']; ?>" name="course_name" placeholder="Department Name">
 				    </div>
 				    <div class="col-md-8">
 				      <h6>Department Name: </h6>
@@ -95,11 +97,12 @@
 							if($count = 1){
 								while ($row = mysqli_fetch_array($results)){
 						?>
-								<option value = "<?php echo $row['department_code'] ?>"><?php echo $row['department_name']?></option>
+								<option value = "<?php echo $row['department_code'] ?>"<?php if($row['department_code'] == $row1['department_code']);?> ><?php echo $row['department_name']?></option>
 							
 							<?php } 
 				  			}?>
 			  			</select>
+			  		<?php }}?>
 				    </div>
 				  </div>
 				  <br />

@@ -20,8 +20,6 @@ if (isset($_POST['login'])){
 		$results = mysqli_query($db, $sql);
 		$num_count = mysqli_num_rows($results);
 		if ($num_count == 1){
-		$_SESSION['username'] = $username;
-		$_SESSION['success'] = "Welcome";
 		header('location: index.php?username='.$username);
 	}
 	else{
@@ -41,7 +39,7 @@ if (isset($_POST['login'])){
 			VALUES ('$department_code','$department_name')";
 			mysqli_query($db, $sql);
 			$_SESSION['message'] = "successfully saved";
-			header('location: list_of_department.php'); //redirect to homepage
+			header('location: add_new_department.php'); //redirect to homepage
 		} 
 
 
@@ -98,7 +96,7 @@ if (isset($_POST['login'])){
 			VALUES ('$organization_code','$organization_name')";
 			mysqli_query($db, $sql);
 			$_SESSION['message'] = "successfully saved";
-			header('location: list_of_organization.php'); //redirect to homepage
+			header('location: add_new_organization.php'); //redirect to homepage
 		}
 
 	//delete organization
@@ -149,7 +147,7 @@ if (isset($_POST['login'])){
 			VALUES ('$course_code','$course_name' ,'$department_code')";
 			mysqli_query($db, $sql);
 			$_SESSION['message'] = "successfully saved";
-			header('location: list_of_program.php'); //redirect to homepage
+			header('location: add_new_program.php'); //redirect to homepage
 	}
 
 	//delete program
@@ -201,7 +199,7 @@ if (isset($_POST['login'])){
 			VALUES ('$section_id','$year')";
 			mysqli_query($db, $sql);
 			$_SESSION['message'] = "successfully saved";
-			header('location: list_of_section.php'); //redirect to homepage
+			header('location: add_new_section.php'); //redirect to homepage
 		} 
 	
 	
@@ -262,7 +260,7 @@ if (isset($_POST['login'])){
 			VALUES ('$id_number','$first_name','$last_name' ,'$middle_name','$course_code','$section_id','$status')";
 			mysqli_query($db, $sql);
 			$_SESSION['message'] = "successfully saved";
-			header('location: list_of_student.php'); //redirect to homepage
+			header('location: add_new_student.php'); //redirect to homepage
 	}
 
 	//edit student
@@ -317,7 +315,7 @@ if (isset($_POST['login'])){
 			VALUES ('$event_code','$event_name','$date')";
 			mysqli_query($db, $sql);
 			$_SESSION['message'] = "successfully saved";
-			header('location: list_of_event.php'); //redirect to homepage
+			header('location: add_new_event.php'); //redirect to homepage
 		} 
 
 	//edit event
@@ -418,7 +416,7 @@ if (isset($_POST['login'])){
 	$results = mysqli_query($db, $query);
 	if (mysqli_num_rows($results)==1){
 		while ($row = mysqli_fetch_assoc($results)) {
-			mysqli_query($db, "UPDATE section_officer SET id_number ='$id_number', section_id = '$section_id', position ='$position', academic_code ='$academic_code' WHERE id_number='$id_number'");
+			mysqli_query($db, "UPDATE section_officer SET id_number ='$id_number', section_id ='$section_id', position ='$position', academic_code ='$academic_code' WHERE id_number='$id_number'");
 			$_SESSION['message'] = "Successfully updated!"; 
 			header('location: list_of_section_officer.php');
 			}
@@ -576,47 +574,7 @@ if (isset($_POST['login'])){
 		}
 }
 
-	//add payment
-		$id_number = "";
-		$event_code = "";
-		$penalty = "";
-		$amount = "";
-		$status = "";
-		$balance = "";
-		$status = "";
-		$update = false;
-	if(isset($_POST['save7'])){
-		$id_number = $_POST['id_number'];
-		$event_code = $_POST['event_code'];
-		$penalty = $_POST['penalty'];
-		$amount = $_POST['amount'];
-		$status = $_POST['status'];
-		$balance = $_POST['balance'];
-		$date = $_POST['date'];
+	
 
-		$sql = "INSERT INTO payment (id_number, event_code, penalty, amount, status, balance, date )
-			VALUES ('$id_number','$event_code','$penalty','$amount','$status','$balance','$date')";
-			mysqli_query($db, $sql);
-			$_SESSION['message'] = "successfully saved";
-			header('location: add_new_payment.php'); //redirect to homepage
-	}
-
-	//edit payment
-	if (isset($_POST['EDIT4'])) {
-		$amount = $_POST['amount'];
-		$status = $_POST['status'];
-		$balance = $_POST['balance'];
-		$date = $_POST['date'];
-
-	$query = "SELECT * FROM payment WHERE id_number='$id_number'";
-	$results = mysqli_query($db, $query);
-	if (mysqli_num_rows($results)==1){
-		while ($row = mysqli_fetch_assoc($results)) {
-			mysqli_query($db, "INSERT INTO payment SET amount ='$amount', status ='$status', balance ='$balance', date ='$date' WHERE id_number='$id_number'");
-			$_SESSION['message'] = "Successfully updated!"; 
-			header('location: payment.php');
-			}
-		}
-}
 
  ?>
