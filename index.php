@@ -1,5 +1,4 @@
 <?php include ('server.php');
- 
 
  ?>
 
@@ -38,14 +37,13 @@
 	<div class="container-fluid">
 				<div class="btn-group btn-group-lg" role="group"">
 				
-					<a href = "list_of_student.php"><button type="button" class="btn btn-outline-dark">Student</button></a>
+					<a href = "list_of_student.php"><button type="button" class="btn btn-outline-dark">List of Student</button></a>
 					<a href ="list_of_organization.php"><button type="button" class="btn btn-outline-dark">Organization</button></a>
-					<a href ="list_of_section.php"><button type="button" class="btn btn-outline-dark">Sections</button></a>
+					<a href ="list_of_section.php"><button type="button" class="btn btn-outline-dark">List of Sections</button></a>
 					<a href ="list_of_department.php"><button type="button" class="btn btn-outline-dark">Departments</button>
 					<a href ="list_of_program.php"><button type="button" class="btn btn-outline-dark">Program</button></a>
 					<a href ="list_of_event.php"><button type="button" class="btn btn-outline-dark">Events</button></a>
 					<a href ="fines.php"><button type="button" class="btn btn-outline-dark">Fines</button></a>
-					<a href ="payment.php"><button type="button" class="btn btn-outline-dark">Payment</button></a>
 					<a href ="list_of_organization_member.php"><button type="button" class="btn btn-outline-dark">Org. Member</button></a>
 					<a href ="list_of_organization_officer.php"><button type="button" class="btn btn-outline-dark">Org. Officer</button></a>
 					<a href ="list_of_organization_moderator.php"><button type="button" class="btn btn-outline-dark">Org. Moderator</button></a>
@@ -82,7 +80,7 @@
 			</div>
 			<div class="col-sm-4">
 				<h1>PREAMBLE</h1>
-				<p><bold>We, the dedicated student of the University of Science and Technology of Southern Philippines, Oroquieta Campus, imploring the aid of  Almighty God in order to build a Student Council that shall protect our ideals and rights, promote the common good, in social, political, economic, moral and spiritual development, imbued with the University Core Values, support and defend our laws and uphold the ideals and democracy with the regime of truth, justice and peace, do hereby promulgate this Constitution.</bold></p>
+				<p style="font-family: Arial, Helvetica, sans-serif"><bold><i>We, the dedicated student of the University of Science and Technology of Southern Philippines, Oroquieta Campus, imploring the aid of  Almighty God in order to build a Student Council that shall protect our ideals and rights, promote the common good, in social, political, economic, moral and spiritual development, imbued with the University Core Values, support and defend our laws and uphold the ideals and democracy with the regime of truth, justice and peace, do hereby promulgate this Constitution.</i></bold></p>
 			</div>
 		</div>
 	</div>

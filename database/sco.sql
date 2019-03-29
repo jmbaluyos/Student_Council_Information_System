@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 21, 2019 at 02:14 AM
+-- Generation Time: Mar 29, 2019 at 10:21 AM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -29,9 +29,9 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `academic_year` (
-  `academic_code` varchar(50) NOT NULL,
-  `acad_year` varchar(50) NOT NULL,
-  `semester` varchar(50) NOT NULL
+  `academic_code` int(11) NOT NULL,
+  `acad_year` varchar(20) NOT NULL,
+  `semester` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -39,8 +39,10 @@ CREATE TABLE `academic_year` (
 --
 
 INSERT INTO `academic_year` (`academic_code`, `acad_year`, `semester`) VALUES
-('bvcbvc', '2018-2019', '2nd semester'),
-('werwr', '2018-2019', '1st semester');
+(1, '2018-2019', '1st semester'),
+(2, '2018-2019', '2nd semester'),
+(3, '2016-2017', '1st semester'),
+(4, '2016-2017', '2nd semester');
 
 -- --------------------------------------------------------
 
@@ -50,7 +52,7 @@ INSERT INTO `academic_year` (`academic_code`, `acad_year`, `semester`) VALUES
 
 CREATE TABLE `department` (
   `department_code` char(10) NOT NULL,
-  `department_name` varchar(100) NOT NULL
+  `department_name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -58,10 +60,10 @@ CREATE TABLE `department` (
 --
 
 INSERT INTO `department` (`department_code`, `department_name`) VALUES
-('BSBA', 'BUSINESS Administration Department'),
-('EDUC', 'EDUCATION DEPARTMENT'),
-('ENG', 'ENGINEERING department'),
-('IT', 'INFORMATION TECHNOLOGY department');
+('BSBA', 'BUSINESS ADMINISTRATION DEPARTMENT'),
+('ComSci', 'Computer SCIENCE Department'),
+('EDUC', 'EDUCATION department'),
+('IT', 'IT DEPARTMENT');
 
 -- --------------------------------------------------------
 
@@ -70,7 +72,7 @@ INSERT INTO `department` (`department_code`, `department_name`) VALUES
 --
 
 CREATE TABLE `event` (
-  `event_code` varchar(100) NOT NULL,
+  `event_code` varchar(20) NOT NULL,
   `event_name` varchar(100) DEFAULT NULL,
   `date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -80,11 +82,9 @@ CREATE TABLE `event` (
 --
 
 INSERT INTO `event` (`event_code`, `event_name`, `date`) VALUES
-('CF', 'Cultural Fiest', '2019-02-14'),
-('gen ass', 'general assembly', '2019-02-28'),
-('ITday', 'Information Technology Day', '2019-03-20'),
-('symposium', 'ANTI-DRUGS', '2019-02-14'),
-('workshop', 'resume WRITING', '2019-03-07');
+('CF', 'Cultural Fest', '2019-03-20'),
+('gen ass', 'GENERAL assembly', '2019-02-15'),
+('ITday', 'Information Technology Day', '2019-03-14');
 
 -- --------------------------------------------------------
 
@@ -93,22 +93,24 @@ INSERT INTO `event` (`event_code`, `event_name`, `date`) VALUES
 --
 
 CREATE TABLE `fines` (
-  `id_number` varchar(50) NOT NULL,
-  `event_code` varchar(100) NOT NULL,
-  `penalty` decimal(10,2) NOT NULL
+  `id_number` varchar(15) NOT NULL,
+  `event_code` varchar(20) NOT NULL,
+  `penalty` decimal(10,2) NOT NULL,
+  `status` varchar(10) NOT NULL DEFAULT 'Unpaid',
+  `date_paid` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `fines`
 --
 
-INSERT INTO `fines` (`id_number`, `event_code`, `penalty`) VALUES
-('111111', 'symposium', '45.50'),
-('99999', 'gen ass', '100.50'),
-('111111', 'workshop', '45.50'),
-('77777', 'ITday', '100.00'),
-('66666', 'CF', '5000.00'),
-('77777', 'ITday', '500.00');
+INSERT INTO `fines` (`id_number`, `event_code`, `penalty`, `status`, `date_paid`) VALUES
+('000000', 'gen ass', '100.00', 'Paid', '2019-03-09 00:00:00'),
+('22222', 'ITday', '500.00', 'Paid', '2019-03-13 00:00:00'),
+('77777', 'CF', '100.00', '', NULL),
+('77777', 'gen ass', '600.00', '', NULL),
+('77777', 'ITday', '500.00', '', NULL),
+('33333', 'gen ass', '500.00', '', NULL);
 
 -- --------------------------------------------------------
 
@@ -117,7 +119,7 @@ INSERT INTO `fines` (`id_number`, `event_code`, `penalty`) VALUES
 --
 
 CREATE TABLE `organization` (
-  `organization_code` varchar(50) NOT NULL,
+  `organization_code` varchar(20) NOT NULL,
   `organization_name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -126,10 +128,9 @@ CREATE TABLE `organization` (
 --
 
 INSERT INTO `organization` (`organization_code`, `organization_name`) VALUES
-('CodEn', 'CODING enthusiast'),
-('GCY', 'GREEN Cross Youth'),
+('CodEn', 'CODING ENTHUSIAST'),
 ('LGDC', 'LIKHANG Galaw Dance Company'),
-('RCY', 'Green Cross Youth');
+('RCY', 'RED Cross YOUTH');
 
 -- --------------------------------------------------------
 
@@ -138,9 +139,9 @@ INSERT INTO `organization` (`organization_code`, `organization_name`) VALUES
 --
 
 CREATE TABLE `org_member` (
-  `organization_code` varchar(50) NOT NULL,
-  `id_number` varchar(50) NOT NULL,
-  `academic_code` varchar(50) NOT NULL
+  `organization_code` varchar(20) NOT NULL,
+  `id_number` varchar(15) NOT NULL,
+  `academic_code` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -148,9 +149,11 @@ CREATE TABLE `org_member` (
 --
 
 INSERT INTO `org_member` (`organization_code`, `id_number`, `academic_code`) VALUES
-('CodEn', '111111', 'bvcbvc'),
-('LGDC', '88888', 'bvcbvc'),
-('CodEn', '77777', 'werwr');
+('CodEn', '000000', 4),
+('LGDC', '55555', 2),
+('RCY', '33333', 2),
+('RCY', '88888', 1),
+('CodEn', '88888', 3);
 
 -- --------------------------------------------------------
 
@@ -159,12 +162,12 @@ INSERT INTO `org_member` (`organization_code`, `id_number`, `academic_code`) VAL
 --
 
 CREATE TABLE `org_moderator` (
-  `instructor_id` varchar(50) NOT NULL,
-  `last_name` varchar(50) NOT NULL,
-  `first_name` varchar(50) NOT NULL,
-  `middle_name` varchar(50) NOT NULL,
-  `organization_code` varchar(50) NOT NULL,
-  `academic_code` varchar(50) NOT NULL
+  `instructor_id` varchar(15) NOT NULL,
+  `last_name` varchar(20) NOT NULL,
+  `first_name` varchar(20) NOT NULL,
+  `middle_name` varchar(20) NOT NULL,
+  `organization_code` varchar(20) NOT NULL,
+  `academic_code` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -172,8 +175,9 @@ CREATE TABLE `org_moderator` (
 --
 
 INSERT INTO `org_moderator` (`instructor_id`, `last_name`, `first_name`, `middle_name`, `organization_code`, `academic_code`) VALUES
-('11111', 'Baluyos', 'john michael', 'BALUYOS', 'CodEn', 'bvcbvc'),
-('22222', 'TAMAD', 'Juan', 'Tapulan', 'LGDC', 'werwr');
+('11111', 'TAMAD', 'juan', 'tapulan', 'CodEn', 4),
+('22222', 'pendoko', 'pedro', 'P.', 'LGDC', 2),
+('33333', 'Jooneeeellll', 'Jonel', 'de lima', 'LGDC', 4);
 
 -- --------------------------------------------------------
 
@@ -182,10 +186,10 @@ INSERT INTO `org_moderator` (`instructor_id`, `last_name`, `first_name`, `middle
 --
 
 CREATE TABLE `org_officer` (
-  `id_number` varchar(50) NOT NULL,
-  `position` varchar(50) NOT NULL,
-  `organization_code` varchar(50) NOT NULL,
-  `academic_code` varchar(50) NOT NULL
+  `id_number` varchar(15) NOT NULL,
+  `position` varchar(20) NOT NULL,
+  `organization_code` varchar(20) NOT NULL,
+  `academic_code` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -193,26 +197,11 @@ CREATE TABLE `org_officer` (
 --
 
 INSERT INTO `org_officer` (`id_number`, `position`, `organization_code`, `academic_code`) VALUES
-('111111', 'P.I.O', 'GCY', 'werwr'),
-('77777', 'Treasurer', 'RCY', 'bvcbvc'),
-('66666', 'v-president', 'LGDC', 'bvcbvc'),
-('88888', 'secretary', 'GCY', 'werwr');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `payment`
---
-
-CREATE TABLE `payment` (
-  `id_number` varchar(50) NOT NULL,
-  `event_code` varchar(100) NOT NULL,
-  `penalty` decimal(10,2) NOT NULL,
-  `amount` decimal(10,2) NOT NULL,
-  `status` varchar(50) NOT NULL,
-  `balance` decimal(10,2) NOT NULL,
-  `date` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+('33333', 'President', 'LGDC', 3),
+('44444', 'Treasurer', 'RCY', 1),
+('77777', 'Vice_president', 'LGDC', 2),
+('88888', 'Vice_president', 'CodEn', 4),
+('55555', 'P.I.O', 'LGDC', 2);
 
 -- --------------------------------------------------------
 
@@ -231,10 +220,9 @@ CREATE TABLE `program` (
 --
 
 INSERT INTO `program` (`course_code`, `course_name`, `department_code`) VALUES
-('BSBA', 'Bachelor of Science in Business Administration BSBA', 'EDUC'),
-('Educ', 'Bachelor of Science in SECONDARY EDUCATION ', 'BSBA'),
-('ENGR', 'Bachelor of Science in Engineering', 'ENG'),
-('IT', 'Bachelor of Science in Information Technology', 'IT');
+('BSBA', 'Bachelor of Science in Business Administration', 'BSBA'),
+('BSIT', 'Bachelor of Science in Information Technology', 'BSBA'),
+('EDUC', 'Bachelor of Science in SECONDARY EDUCATION ', 'EDUC');
 
 -- --------------------------------------------------------
 
@@ -243,8 +231,8 @@ INSERT INTO `program` (`course_code`, `course_name`, `department_code`) VALUES
 --
 
 CREATE TABLE `section` (
-  `section_id` varchar(20) NOT NULL,
-  `year` varchar(20) NOT NULL
+  `section_id` varchar(10) NOT NULL,
+  `year` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -253,14 +241,17 @@ CREATE TABLE `section` (
 
 INSERT INTO `section` (`section_id`, `year`) VALUES
 ('1a', '1st YEAR'),
+('1b', '1st YEAR'),
 ('1c', '1st YEAR'),
-('1d', '1st YEAR'),
-('2a', '2nd YEAR'),
+('2a', '2nd year'),
+('2b', '2nd year'),
 ('2c', '2nd year'),
-('2d', '2nd YEAR'),
-('2f', '2nd YEAR'),
-('3a', '3rd YEAR'),
-('4b', '4th YEAR');
+('3a', '3rd year'),
+('3b', '3rd year'),
+('3c', '3rd year'),
+('4a', '4th YEAR'),
+('4b', '4th YEAR'),
+('4c', '4th YEAR');
 
 -- --------------------------------------------------------
 
@@ -269,10 +260,10 @@ INSERT INTO `section` (`section_id`, `year`) VALUES
 --
 
 CREATE TABLE `section_officer` (
-  `id_number` varchar(50) NOT NULL,
-  `position` varchar(50) NOT NULL,
-  `academic_code` varchar(50) NOT NULL,
-  `section_id` varchar(20) NOT NULL
+  `id_number` varchar(15) NOT NULL,
+  `position` varchar(20) NOT NULL,
+  `academic_code` int(11) NOT NULL,
+  `section_id` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -280,8 +271,10 @@ CREATE TABLE `section_officer` (
 --
 
 INSERT INTO `section_officer` (`id_number`, `position`, `academic_code`, `section_id`) VALUES
-('111111', 'Treasurer', 'werwr', '4b'),
-('77777', 'Auditor', 'werwr', '2a');
+('111111', 'P.I.O', 4, '3b'),
+('22222', 'Auditor', 3, '4b'),
+('66666', 'Treasurer', 3, '1a'),
+('99999', 'Treasurer', 4, '2c');
 
 -- --------------------------------------------------------
 
@@ -290,13 +283,13 @@ INSERT INTO `section_officer` (`id_number`, `position`, `academic_code`, `sectio
 --
 
 CREATE TABLE `student` (
-  `id_number` varchar(50) NOT NULL,
-  `last_name` varchar(100) NOT NULL,
-  `first_name` varchar(100) NOT NULL,
-  `middle_name` varchar(100) NOT NULL,
+  `id_number` varchar(15) NOT NULL,
+  `last_name` varchar(20) NOT NULL,
+  `first_name` varchar(20) NOT NULL,
+  `middle_name` varchar(20) NOT NULL,
   `course_code` varchar(10) NOT NULL,
-  `section_id` varchar(20) NOT NULL,
-  `status` varchar(50) NOT NULL
+  `section_id` varchar(10) NOT NULL,
+  `status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -304,14 +297,16 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`id_number`, `last_name`, `first_name`, `middle_name`, `course_code`, `section_id`, `status`) VALUES
-('10101010', 'de lima', 'Joneelll', 'de upat', 'ENGR', '2c', 'dropped'),
-('111111', 'baluyos', 'john michael', '', 'BSBA', '1d', 'currently Enrolled'),
-('22222', 'Badiang', 'kelvin', 'P.', 'BSBA', '3a', 'currently enrolled'),
-('33333', 'Badiang', 'JD', 'C.', 'BSBA', '3a', 'currently enrolled'),
-('66666', 'bolodo', 'steve', 'Etot', 'Educ', '2c', 'currently Enrolled'),
-('77777', 'diola', 'rovel', 'Bunsalo', 'BSBA', '2f', 'currently enrolled'),
-('88888', 'Cabantac', 'Brian James', 'AsinBEtsin', 'Educ', '1a', 'currently Enrolled'),
-('99999', 'Aya-ay', 'Rupert ', 'wangkig', 'ENGR', '2d', 'currently Enrolled');
+('000000', 'Baluyos', 'john michael', '', 'BSIT', '3a', 'Currently Enrolled'),
+('111111', 'diola', 'rovel', 'ajias', 'BSBA', '2b', 'Currently Enrolled'),
+('22222', 'Aya-ay', 'Rupert ', 'M.', 'EDUC', '1c', 'Currently Enrolled'),
+('33333', 'bolodo', 'steve', 'p.', 'BSBA', '3a', 'Currently Enrolled'),
+('44444', 'Cabantac', 'Brian James', 'gwapo', 'EDUC', '4a', 'Currently Enrolled'),
+('55555', 'egonia', 'fred mark', 'budo', 'BSIT', '1b', 'Currently Enrolled'),
+('66666', 'manlawe', 'catlyn ', 'gwapa', 'BSBA', '4b', 'Currently Enrolled'),
+('77777', 'banaglorioso', 'ian', 'pader', 'BSBA', '4b', 'Currently Enrolled'),
+('88888', 'mocay', 'mae joy', 'MJ', 'BSIT', '3a', 'Currently Enrolled'),
+('99999', 'AMOMONPON', 'JOAN', 'brad', 'EDUC', '3b', 'Currently Enrolled');
 
 -- --------------------------------------------------------
 
@@ -359,8 +354,8 @@ ALTER TABLE `event`
 -- Indexes for table `fines`
 --
 ALTER TABLE `fines`
-  ADD KEY `fines_ibfk_1` (`id_number`),
-  ADD KEY `fines_ibfk_2` (`event_code`);
+  ADD KEY `event_code` (`event_code`),
+  ADD KEY `id_number` (`id_number`);
 
 --
 -- Indexes for table `organization`
@@ -372,32 +367,25 @@ ALTER TABLE `organization`
 -- Indexes for table `org_member`
 --
 ALTER TABLE `org_member`
-  ADD KEY `org_member_ibfk_1` (`organization_code`),
-  ADD KEY `org_member_ibfk_2` (`id_number`),
-  ADD KEY `org_member_ibfk_3` (`academic_code`);
+  ADD KEY `academic_code` (`academic_code`),
+  ADD KEY `id_number` (`id_number`),
+  ADD KEY `organization_code` (`organization_code`);
 
 --
 -- Indexes for table `org_moderator`
 --
 ALTER TABLE `org_moderator`
   ADD PRIMARY KEY (`instructor_id`),
-  ADD KEY `org_moderator_ibfk_1` (`organization_code`),
-  ADD KEY `acadamic_code` (`academic_code`);
+  ADD KEY `organization_code` (`organization_code`),
+  ADD KEY `org_moderator_ibfk_2` (`academic_code`);
 
 --
 -- Indexes for table `org_officer`
 --
 ALTER TABLE `org_officer`
-  ADD KEY `org_officer_ibfk_1` (`id_number`),
-  ADD KEY `org_officer_ibfk_2` (`organization_code`),
-  ADD KEY `org_officer_ibfk_3` (`academic_code`);
-
---
--- Indexes for table `payment`
---
-ALTER TABLE `payment`
-  ADD KEY `payment_ibfk_1` (`id_number`),
-  ADD KEY `payment_ibfk_2` (`event_code`);
+  ADD KEY `id_number` (`id_number`),
+  ADD KEY `organization_code` (`organization_code`),
+  ADD KEY `academic_code` (`academic_code`);
 
 --
 -- Indexes for table `program`
@@ -416,9 +404,9 @@ ALTER TABLE `section`
 -- Indexes for table `section_officer`
 --
 ALTER TABLE `section_officer`
-  ADD KEY `section_officer_ibfk_1` (`id_number`),
-  ADD KEY `section_officer_ibfk_2` (`academic_code`),
-  ADD KEY `section_officer_ibfk_3` (`section_id`);
+  ADD KEY `id_number` (`id_number`),
+  ADD KEY `section_id` (`section_id`),
+  ADD KEY `section_officer_ibfk_4` (`academic_code`);
 
 --
 -- Indexes for table `student`
@@ -439,6 +427,12 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `academic_year`
+--
+ALTER TABLE `academic_year`
+  MODIFY `academic_code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
@@ -452,16 +446,16 @@ ALTER TABLE `user`
 -- Constraints for table `fines`
 --
 ALTER TABLE `fines`
-  ADD CONSTRAINT `fines_ibfk_1` FOREIGN KEY (`id_number`) REFERENCES `student` (`id_number`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fines_ibfk_2` FOREIGN KEY (`event_code`) REFERENCES `event` (`event_code`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fines_ibfk_1` FOREIGN KEY (`event_code`) REFERENCES `event` (`event_code`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fines_ibfk_2` FOREIGN KEY (`id_number`) REFERENCES `student` (`id_number`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `org_member`
 --
 ALTER TABLE `org_member`
-  ADD CONSTRAINT `org_member_ibfk_1` FOREIGN KEY (`organization_code`) REFERENCES `organization` (`organization_code`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `org_member_ibfk_1` FOREIGN KEY (`academic_code`) REFERENCES `academic_year` (`academic_code`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `org_member_ibfk_2` FOREIGN KEY (`id_number`) REFERENCES `student` (`id_number`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `org_member_ibfk_3` FOREIGN KEY (`academic_code`) REFERENCES `academic_year` (`academic_code`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `org_member_ibfk_3` FOREIGN KEY (`organization_code`) REFERENCES `organization` (`organization_code`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `org_moderator`
@@ -479,13 +473,6 @@ ALTER TABLE `org_officer`
   ADD CONSTRAINT `org_officer_ibfk_3` FOREIGN KEY (`academic_code`) REFERENCES `academic_year` (`academic_code`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `payment`
---
-ALTER TABLE `payment`
-  ADD CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`id_number`) REFERENCES `student` (`id_number`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `payment_ibfk_2` FOREIGN KEY (`event_code`) REFERENCES `event` (`event_code`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `program`
 --
 ALTER TABLE `program`
@@ -495,9 +482,9 @@ ALTER TABLE `program`
 -- Constraints for table `section_officer`
 --
 ALTER TABLE `section_officer`
-  ADD CONSTRAINT `section_officer_ibfk_1` FOREIGN KEY (`id_number`) REFERENCES `student` (`id_number`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `section_officer_ibfk_2` FOREIGN KEY (`academic_code`) REFERENCES `academic_year` (`academic_code`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `section_officer_ibfk_3` FOREIGN KEY (`section_id`) REFERENCES `section` (`section_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `section_officer_ibfk_2` FOREIGN KEY (`id_number`) REFERENCES `student` (`id_number`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `section_officer_ibfk_3` FOREIGN KEY (`section_id`) REFERENCES `section` (`section_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `section_officer_ibfk_4` FOREIGN KEY (`academic_code`) REFERENCES `academic_year` (`academic_code`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `student`

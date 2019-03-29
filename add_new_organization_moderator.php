@@ -44,7 +44,6 @@
 					<li><a href ="list_of_program.php"><button type="button" class="btn btn-outline-dark">Program</button></a></li>
 					<li><a href ="list_of_event.php"><button type="button" class="btn btn-outline-dark">Events</button></a></li>
 					<li><a href ="fines.php"><button type="button" class="btn btn-outline-dark">Fines</button></a></li>
-					<li><a href ="payment.php"><button type="button" class="btn btn-outline-dark">Payment</button></a></li>
 					<li><a href ="list_of_organization_member.php"><button type="button" class="btn btn-outline-dark">Organization Member</button></a></li>
 					<li><a href ="list_of_organization_officer.php"><button type="button" class="btn btn-outline-dark">Organization Officer</button></a></li>
 					<li><a href ="list_of_organization_moderator.php"><button type="button" class="btn btn-outline-dark">Organization Moderator</button></a></li>
@@ -64,13 +63,13 @@
 				<form action = "add_new_organization_moderator.php" method="POST">
 				  <div class="form-row">
 				    <div class="col-md-4">
-				      <h6>Instructor ID#</h6><input type="text" class="form-control" name="instructor_id" placeholder="Instructor Id">
+				      <h6>Instructor ID#</h6><input type="text" class="form-control" name="instructor_id" placeholder="Instructor Id" pattern="[A-Za-z0-9]+" required>
 					</div>
 				    <div class="col-md-8">
-				      <h6>Lastname: </h6><input type="text" class="form-control" name= "last_name" placeholder="Enter last name">
+				      <h6>Lastname: </h6><input type="text" class="form-control" name= "last_name" placeholder="Enter last name" pattern="[A-Za-z]+" required>
 				    </div>
 					<div class="col-md-8">
-				      <h6>Firstname: </h6><input type="text" class="form-control" name= "first_name" placeholder="Enter first name">
+				      <h6>Firstname: </h6><input type="text" class="form-control" name= "first_name" placeholder="Enter first name" pattern="[A-Za-z]+" required>
 				    </div>
 					<div class="col-md-8">
 				      <h6>M.I: </h6><input type="text" class="form-control" name= "middle_name" placeholder="Enter middle name">

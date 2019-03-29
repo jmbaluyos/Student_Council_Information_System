@@ -44,7 +44,6 @@
 					<li><a href ="list_of_program.php"><button type="button" class="btn btn-outline-dark">Program</button></a></li>
 					<li><a href ="list_of_event.php"><button type="button" class="btn btn-outline-dark">Events</button></a></li>
 					<li><a href ="fines.php"><button type="button" class="btn btn-outline-dark">Fines</button></a></li>
-					<li><a href ="payment.php"><button type="button" class="btn btn-outline-dark">Payment</button></a></li>
 					<li><a href ="list_of_organization_member.php"><button type="button" class="btn btn-outline-dark">Organization Member</button></a></li>
 					<li><a href ="list_of_organization_officer.php"><button type="button" class="btn btn-outline-dark">Organization Officer</button></a></li>
 					<li><a href ="list_of_organization_moderator.php"><button type="button" class="btn btn-outline-dark">Organization Moderator</button></a></li>
@@ -64,15 +63,15 @@
 				<form action="add_new_event.php" method="POST">
 				  <div class="form-row">
 				    <div class="col-md-4">
-				      <h6>Event Code: </h6><input type="text" class="form-control" name="event_code" placeholder="Event Code">
+				      <h6>Event Code: </h6><input type="text" class="form-control" name="event_code" placeholder="Event Code"  pattern="[A-Za-z0-9]+" required>
 				  </div>
 				    <div class="col-md-8">
-				      <h6>Event Name: </h6><input type="text" class="form-control" name="event_name" placeholder="Event Name">
+				      <h6>Event Name: </h6><input type="text" class="form-control" name="event_name" placeholder="Event Name"  pattern="[A-Za-z]+" required>
 				    </div>
 				  </div>
 				  <div class = "form-row">
 				  	<div class = "col-md-4">
-				  	 <h6>Date: </h6><input type="date" class="form-control" name="date" placeholder="Date">
+				  	 <h6>Date: </h6><input type="date" class="form-control" name="date" placeholder="Date" required>
 				  	</div>
 				  </div>
 				  <br />

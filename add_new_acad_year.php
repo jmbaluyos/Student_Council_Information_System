@@ -51,7 +51,6 @@
 
 					<li><a href ="fines.php"><button type="button" class="btn btn-outline-dark">Fines</button></a></li>
 
-					<li><a href ="payment.php"><button type="button" class="btn btn-outline-dark">Payment</button></a></li>
 
 					<li><a href ="list_of_organization_member.php"><button type="button" class="btn btn-outline-dark">Organization Member</button></a></li>
 
@@ -76,11 +75,11 @@
 				<form action="add_new_acad_year.php" method="POST">
 				  <div class="form-row">
 				    <div class="col-md-6">
-				      <h6>Academic Year: </h6><input type="text" class="form-control" name="acad_year" placeholder="Academic Year">
+				      <h6>Academic Year: </h6><input type="text" class="form-control" name="acad_year" placeholder="Academic Year"  pattern="[A-Za-z0-9]+" required>
 				    </div>
 				  	<div class = "col-md-6">
 				  	 <h6>Semester: </h6>
-				  	 <select class="form-control" name="semester">
+				  	 <select class="form-control" name="semester" required>
 				  	 	<option selected>Select Semester</option>
 				  	 	<option value="First Semester">First Semester</option>
 				  	 	<option value="Second Semester">Second Semester</option>

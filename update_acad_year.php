@@ -68,7 +68,6 @@
 
 					<li><a href ="fines.php"><button type="button" class="btn btn-outline-dark">Fines</button></a></li>
 
-					<li><a href ="payment.php"><button type="button" class="btn btn-outline-dark">Payment</button></a></li>
 
 					<li><a href ="list_of_organization_member.php"><button type="button" class="btn btn-outline-dark">Organization Member</button></a></li>
 

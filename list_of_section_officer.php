@@ -9,8 +9,10 @@
 		<script type="text/javascript" src="bootstrap/js/jquery-slim.min.js"></script>
 		<script type="text/javascript" src="bootstrap/js/popper.min.js"></script>
 		<script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="bootstrap/js/jquery.dataTables.min.js"></script>
 		<link rel = "stylesheet" href = "font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css">
 		<link href = "css/style.css" rel = "stylesheet" type = "text/css" >
+		<link href = "css/jquery.dataTables.min.css" rel = "stylesheet" type = "text/css" >
 </head>
 <body>
 
@@ -36,14 +38,13 @@
 	<div class="container-fluid">
 				<div class="btn-group btn-group-lg" role="group"">
 				
-					<a href = "list_of_student.php"><button type="button" class="btn btn-outline-dark">Student</button></a>
+					<a href = "list_of_student.php"><button type="button" class="btn btn-outline-dark">List of Student</button></a>
 					<a href ="list_of_organization.php"><button type="button" class="btn btn-outline-dark">Organization</button></a>
-					<a href ="list_of_section.php"><button type="button" class="btn btn-outline-dark">Sections</button></a>
+					<a href ="list_of_section.php"><button type="button" class="btn btn-outline-dark">List of Sections</button></a>
 					<a href ="list_of_department.php"><button type="button" class="btn btn-outline-dark">Departments</button>
 					<a href ="list_of_program.php"><button type="button" class="btn btn-outline-dark">Program</button></a>
 					<a href ="list_of_event.php"><button type="button" class="btn btn-outline-dark">Events</button></a>
 					<a href ="fines.php"><button type="button" class="btn btn-outline-dark">Fines</button></a>
-					<a href ="payment.php"><button type="button" class="btn btn-outline-dark">Payment</button></a>
 					<a href ="list_of_organization_member.php"><button type="button" class="btn btn-outline-dark">Org. Member</button></a>
 					<a href ="list_of_organization_officer.php"><button type="button" class="btn btn-outline-dark">Org. Officer</button></a>
 					<a href ="list_of_organization_moderator.php"><button type="button" class="btn btn-outline-dark">Org. Moderator</button></a>
@@ -56,7 +57,7 @@
 				<a href = "add_new_section_officer.php"><span style="float: left; font-size: 50px; margin-right: 50px;"><i class="fa fa-plus-circle" font-size = "50px"></i></span></a>
 				<center><h3>List of Section Officer</h3></center><br />
 				<?php $results = mysqli_query($db, "SELECT * FROM section_officer,academic_year,student WHERE section_officer.academic_code=academic_year.academic_code AND section_officer.id_number=student.id_number"); ?>
-				<table class="table table-primary">
+				<table class="table table-primary" id = "myTable">
 				  <thead class="thead-dark">
 				    <tr>
 				      <th scope="col">ID#</th>
@@ -110,5 +111,10 @@
   				  } ?>
 				</table>			
 	</div>
+<script type="text/javascript">
+	$(document).ready( function () {
+    $('#myTable').DataTable();
+	} );
+</script>	
 </body>
 </html>

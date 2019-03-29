@@ -4,13 +4,15 @@
 	if (isset($_GET['EDIT3'])) {
 		$id_number = $_GET['EDIT3'];
 		$update = true;
-		$record = mysqli_query($db, "SELECT * FROM fines WHERE id_number='$id_number'");
+		$record = mysqli_query($db, "SELECT fines.id_number,fines.status,fines.date_paid,fines.event_code,Sum(penalty) as amount FROM fines WHERE id_number='$id_number'");
 		
 	
 			$result = mysqli_fetch_array($record);
 			$id_number = $result["id_number"];
-			$event_code = $result["event_code"];
-			$penalty = $result["penalty"];
+			$event_code = $result['event_code'];
+			$amount = $result["amount"];
+			$status = $result["status"];
+			$date_paid = $result["date_paid"];
 		
 	}	
 ?>
@@ -53,31 +55,19 @@
 				<div class="btn-group-vertical">
 				<ul style="list-style: none;">
 					<li><a href = "list_of_student.php"><button type="button" class="btn btn-outline-dark">List of Student</button></a></li>
-					<br />
 					<li><a href ="list_of_organization.php"><button type="button" class="btn btn-outline-dark">Organization</button></a></li>
-					<br />
 					<li><a href ="list_of_section.php"><button type="button" class="btn btn-outline-dark">Sections</button></a></li>
-					<br />
 					<li><a href ="list_of_department.php"><button type="button" class="btn btn-outline-dark">Departments</button></a></li>
-					<br />
 					<li><a href ="list_of_program.php"><button type="button" class="btn btn-outline-dark">Program</button></a></li>
-					<br />
 					<li><a href ="list_of_event.php"><button type="button" class="btn btn-outline-dark">Events</button></a></li>
-					<br />
 					<li><a href ="fines.php"><button type="button" class="btn btn-outline-dark">Fines</button></a></li>
-					<br />
-					<li><a href ="payment.php"><button type="button" class="btn btn-outline-dark">Payment</button></a></li>
-					<br />
 					<li><a href ="list_of_organization_member.php"><button type="button" class="btn btn-outline-dark">Organization Member</button></a></li>
-					<br />
 					<li><a href ="list_of_organization_officer.php"><button type="button" class="btn btn-outline-dark">Organization Officer</button></a></li>
-					<br />
 					<li><a href ="list_of_organization_moderator.php"><button type="button" class="btn btn-outline-dark">Organization Moderator</button></a></li>
-					<br />
-					<li><a href ="list_of_section_officer.php"><button type="button" class="btn btn-outline-dark">Section Officer</button></a></li>
-					<br />	
+								<li><a href ="list_of_section_officer.php"><button type="button" class="btn btn-outline-dark">Section Officer</button></a></li>
+				
 					<li><a href ="list_of_acad_year.php"><button type="button" class="btn btn-outline-dark">Academic Year</button></a></li>	
-					<br />		
+						
 				</ul>
 				</div>
 			</div>
@@ -100,33 +90,37 @@
 							if($count = 1){
 								while ($row = mysqli_fetch_array($results)){
 						?>
-								<option value = "<?php echo $row['id_number'] ?>"><?php echo ucwords($row['last_name']." ".$row['first_name']." ".$row['middle_name'])?></option>
+								<option value = "<?php echo $row['id_number'] ?>"><?php echo ucwords("(".$row['id_number'].")"." ".$row['first_name'] ." ". $row['middle_name'] ." ". $row['last_name']) ?></option>
 							
 							<?php } 
 				  			}?>
 					  </select>
 				  	</div>
-				    <div class="col-md-4">
-				      <h6>Event Code: </h6>
-				      <select name = "event_code" class="form-control">
-					  <option selected>Select Event Code</option>
-						<?php 
-							$query = "SELECT * FROM event";
-							$results = mysqli_query($db, $query); 
-							$count = mysqli_num_rows($results);
-							if($count = 1){
-								while ($row = mysqli_fetch_array($results)){
-						?>
-								<option value = "<?php echo $row['event_code'] ?>"><?php echo $row['event_name'] ?></option>
-							
-							<?php } 
-				  			}?>
-					  </select>
+				    <div class="col-md-2">
+				      <h6>Penalty: </h6><input type="text" class="form-control" value="<?php echo "₱".$amount; ?>" name="penalty" readonly>
 				  	</div>
+				  	<!-- <div class="col-md-4">
+				      <div class="form-group">
+					    <label for="exampleFormControlSelect2">Event</label>
+					    <select multiple class="form-control" id="exampleFormControlSelect2" name="event_code">
+					      	<option value = ""><?php echo $event_code ?></option>
+							
+							
+					      
+					    </select>
+					  </div>
+				  	</div> -->
 				  </div>
 				  <div class = "form-row">
-				    <div class="col-md-5">
-				      <h6>Penalty: </h6><input type="text" class="form-control" value="<?php echo $penalty; ?>" name="penalty" placeholder="Penalty">
+				    <div class="col-md-3">
+				      <h6>Status: </h6>
+					    	<select name="status" class="form-control">
+					    		<option selected>Select Status</option>
+					    		<option value="Paid">Paid</option>
+					    	</select>
+				    </div>
+				    <div class="col-md-4">
+				    	<h6>Date: </h6><input type="date" class="form-control" name="date_paid" >
 				    </div>
 				  </div>
 				  <br />

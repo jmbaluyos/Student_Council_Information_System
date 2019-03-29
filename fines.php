@@ -9,8 +9,10 @@
 		<script type="text/javascript" src="bootstrap/js/jquery-slim.min.js"></script>
 		<script type="text/javascript" src="bootstrap/js/popper.min.js"></script>
 		<script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="bootstrap/js/jquery.dataTables.min.js"></script>
 		<link rel = "stylesheet" href = "font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css">
 		<link href = "css/style.css" rel = "stylesheet" type = "text/css" >
+		<link href = "css/jquery.dataTables.min.css" rel = "stylesheet" type = "text/css" >
 </head>
 <body>
 
@@ -36,14 +38,13 @@
 	<div class="container-fluid">
 				<div class="btn-group btn-group-lg" role="group"">
 				
-					<a href = "list_of_student.php"><button type="button" class="btn btn-outline-dark">Student</button></a>
+					<a href = "list_of_student.php"><button type="button" class="btn btn-outline-dark">List of Student</button></a>
 					<a href ="list_of_organization.php"><button type="button" class="btn btn-outline-dark">Organization</button></a>
-					<a href ="list_of_section.php"><button type="button" class="btn btn-outline-dark">Sections</button></a>
+					<a href ="list_of_section.php"><button type="button" class="btn btn-outline-dark">List of Sections</button></a>
 					<a href ="list_of_department.php"><button type="button" class="btn btn-outline-dark">Departments</button>
 					<a href ="list_of_program.php"><button type="button" class="btn btn-outline-dark">Program</button></a>
 					<a href ="list_of_event.php"><button type="button" class="btn btn-outline-dark">Events</button></a>
 					<a href ="fines.php"><button type="button" class="btn btn-outline-dark">Fines</button></a>
-					<a href ="payment.php"><button type="button" class="btn btn-outline-dark">Payment</button></a>
 					<a href ="list_of_organization_member.php"><button type="button" class="btn btn-outline-dark">Org. Member</button></a>
 					<a href ="list_of_organization_officer.php"><button type="button" class="btn btn-outline-dark">Org. Officer</button></a>
 					<a href ="list_of_organization_moderator.php"><button type="button" class="btn btn-outline-dark">Org. Moderator</button></a>
@@ -54,15 +55,18 @@
 				<br /><br />
 				<a href = "add_new_fines.php"><span style="float: left; font-size: 50px; margin-right: 50px;"><i class="fa fa-plus-circle" font-size = "50px"></i></span></a>	
 				<center><h3>Fines</h3></center><br />
-				<table class="table table-primary">
-				<?php $results = mysqli_query($db, "SELECT * FROM fines,student  WHERE fines.id_number = student.id_number"); ?>
+				<table class="table table-primary" id = "myTable">
+				<?php $results = mysqli_query($db, "SELECT fines.id_number,fines.status,fines.date_paid,student.last_name,student.first_name,student.middle_name,Sum(penalty) as amount FROM fines,student  WHERE fines.id_number=student.id_number GROUP BY id_number"); ?>
 				  <thead class="thead-dark">
 				    <tr>
 				      <th scope="col">ID#</th>
 				      <th scope="col">Name</th>
-				      <th scope="col">Event code</th>
 				      <th scope="col">Penalty</th>
+				      <th scope="col">Status</th>
+				      <th scope="col">Date Paid</th>
 				      <th scope="col">Action</th>
+				      
+
 				    </tr>
 				  </thead>
 				  <?php while ($row = mysqli_fetch_array($results)){ ?>
@@ -70,11 +74,19 @@
 				    <tr>
 				      <td><?php echo $row['id_number']?></td>
 				      <td><?php echo ucwords($row['last_name']." ".$row['first_name']." ".$row['middle_name'])?></td>
-				      <td><?php echo $row['event_code']?></td>
-				      <td><?php echo $row['penalty']?></td>
+				      <td><?php echo "₱".$row['amount']?></td>
+				      <td><?php echo $row['status']?></td>
+				      <td><?php if ($row['date_paid'] == NULL){
+				      	echo "";
+				      }
+				      else
+				      {
+				      	echo date('d M Y, g:i A',strtotime($row['date_paid']));}?>
+				      		
+				      </td>
 				      <td>		 
-						<button type="button" class="btn btn-outline-info btn-sm fa fa-pencil"><a href="update_fines.php?EDIT3=<?php echo $row['id_number']; ?>"> Edit </a></button> 
-						<button type="button" class="btn btn-outline-info btn-sm fa fa-book"><a href="update_payment.php?EDIT_4=<?php echo $row['id_number']; ?>"> Payment </a></button> 
+						<!-- <button type="button" class="btn btn-outline-info btn-sm fa fa-pencil"><a href="update_fines.php?EDIT3=<?php echo $row['id_number']; ?>"> Edit </a></button>  -->
+						<button type="button" class="btn btn-outline-info btn-sm fa fa-pencil"><a href="update_fines.php?EDIT3=<?php echo $row['id_number']; ?>"> Update </a></button> 
 						<button type="button" class="btn btn-outline-danger btn-sm fa fa-trash" data-toggle="modal" data-target="#exampleModal">Delete</button>
 
 							<!-- Modal -->
@@ -103,5 +115,10 @@
   				  } ?>
 				</table>			
 	</div>
+<script type="text/javascript">
+	$(document).ready( function () {
+    $('#myTable').DataTable();
+	} );
+</script>	
 </body>
 </html>
