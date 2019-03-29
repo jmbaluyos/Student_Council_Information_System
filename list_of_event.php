@@ -51,7 +51,7 @@
 					<a href ="list_of_acad_year.php"><button type="button" class="btn btn-outline-dark">Academic Year</button></a>
 				
 				</div>
-				<br /><br />
+				
 				<a href = "add_new_event.php"><span style="float: left; font-size: 50px; margin-right: 50px;"><i class="fa fa-plus-circle" font-size = "50px"></i></span></a>
 				<center><h3>List of Events</h3></center><br />
 				<?php $results = mysqli_query($db, "SELECT * FROM event"); ?>

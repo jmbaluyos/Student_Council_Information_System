@@ -63,10 +63,10 @@
 				<form action = "add_new_section.php" method = "POST">
 				  <div class="form-row">
 				    <div class="col-md-6">
-				      <h6>Section: </h6><input type="text" name = "section_id" class="form-control" placeholder="Section" pattern="[A-Za-z0-9]+" required>
+				      <h6>Section: </h6><input type="text" name = "section_id" class="form-control" placeholder="Section">
 				  	</div>
 				    <div class="col-md-6">
-				      <h6>Year: </h6><input type="text" name = "year" class="form-control" placeholder="Year" pattern="[A-Za-z]+" required>
+				      <h6>Year: </h6><input type="text" name = "year" class="form-control" placeholder="Year">
 				    </div>
 				  </div>
 				  <br />

@@ -52,7 +52,7 @@
 				
 				</div>
 				<hr />
-				<br /><br />
+				
 				<a href = "add_new_section.php"><span style="float: left; font-size: 50px; margin-right: 50px;"><i class="fa fa-plus-circle" font-size = "50px"></i></span></a>
 				<center><h3>List of Section</h3></center><br />
 				<?php $results = mysqli_query($db, "SELECT * FROM section"); ?>

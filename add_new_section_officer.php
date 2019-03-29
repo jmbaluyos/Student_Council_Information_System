@@ -117,12 +117,12 @@
 						  <option selected>Select Section</option>
 							<?php 
 								$query = "SELECT * FROM section";
-								$result = mysqli_query($db, $query); 
-								$count = mysqli_num_rows($result);
+								$results = mysqli_query($db, $query); 
+								$count = mysqli_num_rows($results);
 								if($count = 1){
-									while ($row = mysqli_fetch_array($result)){
+									while ($row1 = mysqli_fetch_array($results)){
 							?>
-									<option value = "<?php echo $row['section_id'] ?>"><?php echo $row['section_id']?></option>
+									<option value = "<?php echo $row1['section_id']; ?>"><?php echo $row1['section_id'];?></option>
 								
 								<?php } 
 					  			}?>

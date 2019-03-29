@@ -3,12 +3,12 @@
 	if(isset($_POST['search'])){
 		
 		 $id_number = $_POST['id_number'];
-		 $query = "SELECT `id_number`, `first_name`, `last_name`, `middle_name`, `course_code`, `section_id` FROM `student` WHERE `id_number` = $id_number LIMIT 1";
+		 $query = "SELECT `id_number`, `first_name`, `last_name`, `middle_name`, `course_code`, `section_id` FROM `student` WHERE `id_number` = '$id_number' LIMIT 1";
 		 $result = mysqli_query($db, $query);		
 
 		  if(mysqli_num_rows($result) > 0)
 		    {
-		      while ($row = mysqli_fetch_array($result))
+		      while ($row1 = mysqli_fetch_array($result))
 		      {
 		        $id_number = $row['id_number'];
 		        $first_name = $row['first_name'];
@@ -95,12 +95,11 @@
 				
 				</div>
 				<hr />
-				<br />
 				<a href = "add_new_student.php"><span style="float: left; font-size: 50px; margin-right: 50px;"><i class="fa fa-plus-circle" font-size = "50px"></i></span></a>
 				<center><h3>List of student</h3></center>
 				<br />
 				<?php $results = mysqli_query($db, "SELECT * FROM student,program WHERE student.course_code = program.course_code GROUP BY last_name"); ?>
-				<table class="table table-primary" id = "myTable">
+				<table class="display" id = "myTable">
 				  <thead class="thead-dark">
 				    <tr>
 					  <th scope="col">ID Number</th>
@@ -114,7 +113,7 @@
 				    </tr>
 				  </thead>
 				  <?php while ($row = mysqli_fetch_array($results)){ ?>
-				  <tbody class="table-hover">
+				  <tbody>
 				    <tr>
 				      <td><?php echo $row['id_number']?></td>
 				      <td><?php echo ucwords($row['first_name'])?></td>

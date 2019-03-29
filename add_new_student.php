@@ -74,16 +74,16 @@
 				<form action="add_new_student.php" method = "POST">
 				  <div class="form-row">
 					<div class="col-md-2">
-				      <h6>ID Number: </h6><input type="text" class="form-control" name = "id_number" placeholder="ID Number" required>
+				      <h6>ID Number: </h6><input type="text" class="form-control" name = "id_number" placeholder="ID Number" >
 				    </div>
 				    <div class="col-md-4">
-				      <h6>First Name: </h6><input type="text" class="form-control" name = "first_name" placeholder="First name" pattern="[A-Za-z]+" required>
+				      <h6>First Name: </h6><input type="text" class="form-control" name = "first_name" placeholder="First name">
 				    </div>
 				    <div class="col-md-4">
-				      <h6>Last Name: </h6><input type="text" class="form-control" name = "last_name" placeholder="Last name" pattern="[A-Za-z]+" required>
+				      <h6>Last Name: </h6><input type="text" class="form-control" name = "last_name" placeholder="Last name">
 				    </div>
 				    <div class="col-md-2">
-				      <h6>Middle Initial: </h6><input type="text" class="form-control" name = "middle_name" placeholder="Middle initial" pattern="[A-Za-z]+">
+				      <h6>Middle Initial: </h6><input type="text" class="form-control" name = "middle_name" placeholder="Middle initial">
 				    </div>
 				  </div>
 				  <br />

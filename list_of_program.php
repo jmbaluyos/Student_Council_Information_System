@@ -52,7 +52,7 @@
 				
 				</div>
 				<hr />
-				<br /><br />
+				
 				<a href = "add_new_program.php"><span style="float: left; font-size: 50px; margin-right: 50px;"><i class="fa fa-plus-circle" font-size = "50px"></i></span></a>
 				<center><h3>List of Program</h3></center><br />
 				<?php $results = mysqli_query($db, "SELECT * FROM program,department WHERE program.department_code = department.department_code"); ?>

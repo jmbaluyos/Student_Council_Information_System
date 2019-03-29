@@ -9,6 +9,7 @@
 		<script type="text/javascript" src="bootstrap/js/jquery-slim.min.js"></script>
 		<script type="text/javascript" src="bootstrap/js/popper.min.js"></script>
 		<script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="bootstrap/js/jquery.dataTables.min.js"></script>
 		<link rel = "stylesheet" href = "font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css">
 		<link href = "css/style.css" rel = "stylesheet" type = "text/css" >
 </head>
@@ -112,7 +113,7 @@
 							  		}?>
 								</select>
 							</td>
-							<td><input type="text" class="form-control" name="penalty" placeholder="Penalty"  pattern="[A-Za-z]+" required></td>
+							<td><input type="text" class="form-control" name="penalty" placeholder="Penalty" ></td>
 					    </tbody>
 				      </table> 
 				  	</div>

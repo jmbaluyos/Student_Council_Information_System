@@ -75,11 +75,11 @@
 				<form action="add_new_acad_year.php" method="POST">
 				  <div class="form-row">
 				    <div class="col-md-6">
-				      <h6>Academic Year: </h6><input type="text" class="form-control" name="acad_year" placeholder="Academic Year"  pattern="[A-Za-z0-9]+" required>
+				      <h6>Academic Year: </h6><input type="text" class="form-control" name="acad_year" placeholder="Academic Year">
 				    </div>
 				  	<div class = "col-md-6">
 				  	 <h6>Semester: </h6>
-				  	 <select class="form-control" name="semester" required>
+				  	 <select class="form-control" name="semester">
 				  	 	<option selected>Select Semester</option>
 				  	 	<option value="First Semester">First Semester</option>
 				  	 	<option value="Second Semester">Second Semester</option>

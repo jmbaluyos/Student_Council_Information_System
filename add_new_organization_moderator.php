@@ -63,13 +63,13 @@
 				<form action = "add_new_organization_moderator.php" method="POST">
 				  <div class="form-row">
 				    <div class="col-md-4">
-				      <h6>Instructor ID#</h6><input type="text" class="form-control" name="instructor_id" placeholder="Instructor Id" pattern="[A-Za-z0-9]+" required>
+				      <h6>Instructor ID#</h6><input type="text" class="form-control" name="instructor_id" placeholder="Instructor Id">
 					</div>
 				    <div class="col-md-8">
-				      <h6>Lastname: </h6><input type="text" class="form-control" name= "last_name" placeholder="Enter last name" pattern="[A-Za-z]+" required>
+				      <h6>Lastname: </h6><input type="text" class="form-control" name= "last_name" placeholder="Enter last name">
 				    </div>
 					<div class="col-md-8">
-				      <h6>Firstname: </h6><input type="text" class="form-control" name= "first_name" placeholder="Enter first name" pattern="[A-Za-z]+" required>
+				      <h6>Firstname: </h6><input type="text" class="form-control" name= "first_name" placeholder="Enter first name">
 				    </div>
 					<div class="col-md-8">
 				      <h6>M.I: </h6><input type="text" class="form-control" name= "middle_name" placeholder="Enter middle name">

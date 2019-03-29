@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 29, 2019 at 10:21 AM
+-- Generation Time: Mar 29, 2019 at 11:47 AM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -42,7 +42,8 @@ INSERT INTO `academic_year` (`academic_code`, `acad_year`, `semester`) VALUES
 (1, '2018-2019', '1st semester'),
 (2, '2018-2019', '2nd semester'),
 (3, '2016-2017', '1st semester'),
-(4, '2016-2017', '2nd semester');
+(4, '2016-2017', '2nd semester'),
+(5, '2015-2016', 'Summer');
 
 -- --------------------------------------------------------
 
@@ -63,6 +64,7 @@ INSERT INTO `department` (`department_code`, `department_name`) VALUES
 ('BSBA', 'BUSINESS ADMINISTRATION DEPARTMENT'),
 ('ComSci', 'Computer SCIENCE Department'),
 ('EDUC', 'EDUCATION department'),
+('IA', 'Industrial Art department'),
 ('IT', 'IT DEPARTMENT');
 
 -- --------------------------------------------------------
@@ -84,7 +86,8 @@ CREATE TABLE `event` (
 INSERT INTO `event` (`event_code`, `event_name`, `date`) VALUES
 ('CF', 'Cultural Fest', '2019-03-20'),
 ('gen ass', 'GENERAL assembly', '2019-02-15'),
-('ITday', 'Information Technology Day', '2019-03-14');
+('ITday', 'Information Technology Day', '2019-03-14'),
+('workshop', 'resume WRITING', '2019-03-02');
 
 -- --------------------------------------------------------
 
@@ -97,7 +100,7 @@ CREATE TABLE `fines` (
   `event_code` varchar(20) NOT NULL,
   `penalty` decimal(10,2) NOT NULL,
   `status` varchar(10) NOT NULL DEFAULT 'Unpaid',
-  `date_paid` datetime DEFAULT NULL
+  `date_paid` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -105,12 +108,11 @@ CREATE TABLE `fines` (
 --
 
 INSERT INTO `fines` (`id_number`, `event_code`, `penalty`, `status`, `date_paid`) VALUES
-('000000', 'gen ass', '100.00', 'Paid', '2019-03-09 00:00:00'),
-('22222', 'ITday', '500.00', 'Paid', '2019-03-13 00:00:00'),
-('77777', 'CF', '100.00', '', NULL),
-('77777', 'gen ass', '600.00', '', NULL),
-('77777', 'ITday', '500.00', '', NULL),
-('33333', 'gen ass', '500.00', '', NULL);
+('000000', 'CF', '125.00', '', NULL),
+('000000', 'gen ass', '125.00', '', NULL),
+('111111', 'ITday', '400.00', 'Paid', '2019-03-12'),
+('33333', 'gen ass', '230.00', '', NULL),
+('99999', 'gen ass', '500.00', '', NULL);
 
 -- --------------------------------------------------------
 
@@ -129,6 +131,7 @@ CREATE TABLE `organization` (
 
 INSERT INTO `organization` (`organization_code`, `organization_name`) VALUES
 ('CodEn', 'CODING ENTHUSIAST'),
+('COJ', 'Char char'),
 ('LGDC', 'LIKHANG Galaw Dance Company'),
 ('RCY', 'RED Cross YOUTH');
 
@@ -153,7 +156,8 @@ INSERT INTO `org_member` (`organization_code`, `id_number`, `academic_code`) VAL
 ('LGDC', '55555', 2),
 ('RCY', '33333', 2),
 ('RCY', '88888', 1),
-('CodEn', '88888', 3);
+('CodEn', '88888', 3),
+('CodEn', '99999', 2);
 
 -- --------------------------------------------------------
 
@@ -175,6 +179,7 @@ CREATE TABLE `org_moderator` (
 --
 
 INSERT INTO `org_moderator` (`instructor_id`, `last_name`, `first_name`, `middle_name`, `organization_code`, `academic_code`) VALUES
+('101010', 'Gosling', 'James', 'dsfdsdsfds', 'CodEn', 1),
 ('11111', 'TAMAD', 'juan', 'tapulan', 'CodEn', 4),
 ('22222', 'pendoko', 'pedro', 'P.', 'LGDC', 2),
 ('33333', 'Jooneeeellll', 'Jonel', 'de lima', 'LGDC', 4);
@@ -201,7 +206,8 @@ INSERT INTO `org_officer` (`id_number`, `position`, `organization_code`, `academ
 ('44444', 'Treasurer', 'RCY', 1),
 ('77777', 'Vice_president', 'LGDC', 2),
 ('88888', 'Vice_president', 'CodEn', 4),
-('55555', 'P.I.O', 'LGDC', 2);
+('55555', 'P.I.O', 'LGDC', 2),
+('99999', 'Secretary', 'CodEn', 2);
 
 -- --------------------------------------------------------
 
@@ -222,7 +228,8 @@ CREATE TABLE `program` (
 INSERT INTO `program` (`course_code`, `course_name`, `department_code`) VALUES
 ('BSBA', 'Bachelor of Science in Business Administration', 'BSBA'),
 ('BSIT', 'Bachelor of Science in Information Technology', 'BSBA'),
-('EDUC', 'Bachelor of Science in SECONDARY EDUCATION ', 'EDUC');
+('EDUC', 'Bachelor of Science in SECONDARY EDUCATION ', 'EDUC'),
+('IA', 'Industrial Arts', 'IA');
 
 -- --------------------------------------------------------
 
@@ -251,7 +258,8 @@ INSERT INTO `section` (`section_id`, `year`) VALUES
 ('3c', '3rd year'),
 ('4a', '4th YEAR'),
 ('4b', '4th YEAR'),
-('4c', '4th YEAR');
+('4c', '4th YEAR'),
+('5a', '5th Year');
 
 -- --------------------------------------------------------
 
@@ -274,7 +282,12 @@ INSERT INTO `section_officer` (`id_number`, `position`, `academic_code`, `sectio
 ('111111', 'P.I.O', 4, '3b'),
 ('22222', 'Auditor', 3, '4b'),
 ('66666', 'Treasurer', 3, '1a'),
-('99999', 'Treasurer', 4, '2c');
+('99999', 'Treasurer', 4, '2c'),
+('55555', 'Auditor', 4, '5a'),
+('66666', 'P.I.O', 2, '3b'),
+('000000', 'President', 2, '2a'),
+('77777', 'President', 1, '5a'),
+('44444', 'President', 4, '4a');
 
 -- --------------------------------------------------------
 
@@ -430,7 +443,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `academic_year`
 --
 ALTER TABLE `academic_year`
-  MODIFY `academic_code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `academic_code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `user`

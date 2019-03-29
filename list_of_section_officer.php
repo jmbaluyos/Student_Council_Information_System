@@ -53,11 +53,11 @@
 				
 				</div>
 				<hr />
-				<br /><br />
+				
 				<a href = "add_new_section_officer.php"><span style="float: left; font-size: 50px; margin-right: 50px;"><i class="fa fa-plus-circle" font-size = "50px"></i></span></a>
 				<center><h3>List of Section Officer</h3></center><br />
-				<?php $results = mysqli_query($db, "SELECT * FROM section_officer,academic_year,student WHERE section_officer.academic_code=academic_year.academic_code AND section_officer.id_number=student.id_number"); ?>
-				<table class="table table-primary" id = "myTable">
+				<?php $results = mysqli_query($db, "SELECT * FROM section_officer,academic_year,student,section WHERE section_officer.academic_code=academic_year.academic_code AND section_officer.id_number=student.id_number AND section_officer.section_id=section.section_id"); ?>
+				<table class="display" id ="MYTABLE">
 				  <thead class="thead-dark">
 				    <tr>
 				      <th scope="col">ID#</th>
@@ -113,7 +113,7 @@
 	</div>
 <script type="text/javascript">
 	$(document).ready( function () {
-    $('#myTable').DataTable();
+    $('#MYTABLE').DataTable();
 	} );
 </script>	
 </body>

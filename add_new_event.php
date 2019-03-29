@@ -63,15 +63,15 @@
 				<form action="add_new_event.php" method="POST">
 				  <div class="form-row">
 				    <div class="col-md-4">
-				      <h6>Event Code: </h6><input type="text" class="form-control" name="event_code" placeholder="Event Code"  pattern="[A-Za-z0-9]+" required>
+				      <h6>Event Code: </h6><input type="text" class="form-control" name="event_code" placeholder="Event Code">
 				  </div>
 				    <div class="col-md-8">
-				      <h6>Event Name: </h6><input type="text" class="form-control" name="event_name" placeholder="Event Name"  pattern="[A-Za-z]+" required>
+				      <h6>Event Name: </h6><input type="text" class="form-control" name="event_name" placeholder="Event Name">
 				    </div>
 				  </div>
 				  <div class = "form-row">
 				  	<div class = "col-md-4">
-				  	 <h6>Date: </h6><input type="date" class="form-control" name="date" placeholder="Date" required>
+				  	 <h6>Date: </h6><input type="date" class="form-control" name="date" placeholder="Date">
 				  	</div>
 				  </div>
 				  <br />

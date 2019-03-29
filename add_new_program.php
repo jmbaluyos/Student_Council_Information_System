@@ -63,10 +63,10 @@
 				<form action="add_new_program.php" method="POST">
 				  <div class="form-row">
 				    <div class="col-md-4">
-				      <h6>Course Code: </h6><input type="text" class="form-control" name="course_code" placeholder="Course Code" pattern="[A-Za-z0-9]+" required>
+				      <h6>Course Code: </h6><input type="text" class="form-control" name="course_code" placeholder="Course Code">
 				  	</div>
 				    <div class="col-md-8">
-				      <h6>Course Name: </h6><input type="text" class="form-control" name="course_name" placeholder="Course Name" pattern="[A-Za-z]+" required>
+				      <h6>Course Name: </h6><input type="text" class="form-control" name="course_name" placeholder="Course Name">
 				    </div>
 				    <div class="col-md-8">
 				      <h6>Department Name: </h6>

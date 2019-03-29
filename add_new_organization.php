@@ -63,10 +63,10 @@
 				<form action = "add_new_organization.php" method="POST">
 				  <div class="form-row">
 				    <div class="col-md-4">
-				      <h6>Organization code: </h6><input type="text" class="form-control" name="organization_code" placeholder="Org. code"  pattern="[A-Za-z0-9]+" required>
+				      <h6>Organization code: </h6><input type="text" class="form-control" name="organization_code" placeholder="Org. code" required>
 				  </div>
 				    <div class="col-md-8">
-				      <h6>Organization Name: </h6><input type="text" class="form-control" name= "organization_name" placeholder="Organization name"  pattern="[A-Za-z]+" required>
+				      <h6>Organization Name: </h6><input type="text" class="form-control" name= "organization_name" placeholder="Organization name" required>
 				    </div>
 				  </div>
 				  <br />

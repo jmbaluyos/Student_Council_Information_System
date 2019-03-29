@@ -63,10 +63,10 @@
 				<form action = "add_new_department.php" method = "POST">
 				  <div class="form-row">
 				    <div class="col-md-4">
-				      <h6>Department Code: </h6><input type="text" class="form-control" name="department_code" placeholder="Department Code"  pattern="[A-Za-z0-9]+" required>
+				      <h6>Department Code: </h6><input type="text" class="form-control" name="department_code" placeholder="Department Code">
 				  </div>
 				    <div class="col-md-8">
-				      <h6>Department Name: </h6><input type="text" class="form-control" name="department_name" placeholder="Department Name"  pattern="[A-Za-z]+" required>
+				      <h6>Department Name: </h6><input type="text" class="form-control" name="department_name" placeholder="Department Name">
 				    </div>
 				  </div>
 				  <br />
