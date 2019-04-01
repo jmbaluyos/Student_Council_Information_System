@@ -52,7 +52,8 @@
 					<a href ="list_of_acad_year.php"><button type="button" class="btn btn-outline-dark">Academic Year</button></a>	
 				
 				</div>
-				<a href = "add_new_fines.php"><span style="float: left; font-size: 50px; margin-right: 50px;"><i class="fa fa-plus-circle" font-size = "50px"></i></span></a>	
+				<a href = "add_new_fines.php"><span style="float: left; font-size: 50px; margin-right: 50px;"><i class="fa fa-plus-circle" font-size = "50px"></i></span></a>
+				<hr />	
 				<center><h3>Fines</h3></center><br />
 				<table class="table table-primary" id = "myTable">
 				<?php $results = mysqli_query($db, "SELECT fines.id_number,fines.status,fines.date_paid,student.last_name,student.first_name,student.middle_name,Sum(penalty) as amount FROM fines,student  WHERE fines.id_number=student.id_number GROUP BY id_number"); ?>
@@ -63,9 +64,7 @@
 				      <th scope="col">Penalty</th>
 				      <th scope="col">Status</th>
 				      <th scope="col">Date Paid</th>
-				      <th scope="col">Action</th>
-				      
-
+				      <th scope="col">Action</th>			      
 				    </tr>
 				  </thead>
 				  <?php while ($row = mysqli_fetch_array($results)){ ?>
