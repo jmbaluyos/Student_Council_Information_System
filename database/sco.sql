@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 29, 2019 at 11:47 AM
+-- Generation Time: Apr 02, 2019 at 10:08 AM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -108,11 +108,36 @@ CREATE TABLE `fines` (
 --
 
 INSERT INTO `fines` (`id_number`, `event_code`, `penalty`, `status`, `date_paid`) VALUES
-('000000', 'CF', '125.00', '', NULL),
-('000000', 'gen ass', '125.00', '', NULL),
-('111111', 'ITday', '400.00', 'Paid', '2019-03-12'),
-('33333', 'gen ass', '230.00', '', NULL),
-('99999', 'gen ass', '500.00', '', NULL);
+('000000', 'gen ass', '500.00', 'Unpaid', NULL),
+('111111', 'ITday', '200.00', 'Paid', '2019-04-12'),
+('22222', 'ITday', '265.00', 'Unpaid', NULL),
+('33333', 'gen ass', '450.00', 'Paid', '2019-04-12'),
+('111111', 'workshop', '100.00', 'Paid', '2019-04-11'),
+('111111', 'ITday', '500.00', 'Paid', '2019-04-12'),
+('111111', 'ITday', '600.00', 'Paid', '2019-04-12'),
+('111111', 'ITday', '600.00', 'Paid', '2019-04-12'),
+('111111', 'CF', '400.00', 'Paid', '2019-04-11'),
+('000000', 'gen ass', '500.00', 'Unpaid', NULL),
+('000000', 'workshop', '450.00', 'Unpaid', NULL),
+('000000', 'ITday', '200.00', 'Unpaid', NULL),
+('22222', 'CF', '230.00', 'Unpaid', NULL),
+('22222', 'gen ass', '0.00', 'Paid', '2019-04-04'),
+('22222', 'gen ass', '20.00', 'Paid', '2019-04-04'),
+('44444', 'CF', '50.00', 'Unpaid', NULL),
+('44444', 'gen ass', '50.00', 'Unpaid', NULL),
+('44444', 'ITday', '50.00', 'Unpaid', NULL),
+('44444', 'workshop', '50.00', 'Paid', '2019-04-01'),
+('55555', 'CF', '200.00', 'Unpaid', NULL),
+('55555', 'gen ass', '60.00', 'Unpaid', NULL),
+('55555', 'ITday', '55.00', 'Unpaid', NULL),
+('55555', 'workshop', '90.00', 'Unpaid', NULL),
+('88888', 'CF', '100.00', 'Unpaid', NULL),
+('88888', 'workshop', '480.00', 'Unpaid', NULL),
+('99999', 'CF', '120.00', 'Unpaid', NULL),
+('99999', 'gen ass', '90.00', 'Paid', '2019-04-15'),
+('99999', 'ITday', '125.00', 'Unpaid', NULL),
+('99999', 'workshop', '250.00', 'Unpaid', NULL),
+('77777', 'ITday', '400.00', 'Unpaid', NULL);
 
 -- --------------------------------------------------------
 

@@ -12,7 +12,7 @@
 		<script type="text/javascript" src="bootstrap/js/jquery.dataTables.min.js"></script>
 		<link rel = "stylesheet" href = "font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css">
 		<link href = "css/style.css" rel = "stylesheet" type = "text/css" >
-		<link href = "css/jquery.dataTables.min.css" rel = "stylesheet" type = "text/css" >
+		<link  rel = "stylesheet" href = "bootstrap/css/jquery.dataTables.min.css" type = "text/css" >
 </head>
 <body>
 
@@ -56,7 +56,7 @@
 				<hr />	
 				<center><h3>Fines</h3></center><br />
 				<table class="table table-primary" id = "myTable">
-				<?php $results = mysqli_query($db, "SELECT fines.id_number,fines.status,fines.date_paid,student.last_name,student.first_name,student.middle_name,Sum(penalty) as amount FROM fines,student  WHERE fines.id_number=student.id_number GROUP BY id_number"); ?>
+				<?php $results = mysqli_query($db, "SELECT fines.id_number,fines.status,fines.date_paid,student.last_name,student.first_name,student.middle_name,Sum(penalty) as amount FROM fines,student  WHERE fines.status = 'Unpaid' AND fines.id_number=student.id_number GROUP BY id_number"); ?>
 				  <thead class="thead-dark">
 				    <tr>
 				      <th scope="col">ID#</th>

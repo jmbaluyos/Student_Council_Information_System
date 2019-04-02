@@ -49,12 +49,12 @@
 	<title>Supreme Student Council</title>
 		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 		<script type="text/javascript" src="bootstrap/js/jquery-slim.min.js"></script>
-		<script type="text/javascript" src="bootstrap/js/popper.min.js"></script>
-		<script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="bootstrap/js/bootstrap.bundle.js"></script>
+		<script type="text/javascript" src="bootstrap/js/jquery.min.js"></script>
 		<script type="text/javascript" src="bootstrap/js/jquery.dataTables.min.js"></script>
 		<link rel = "stylesheet" href = "font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css">
 		<link href = "css/style.css" rel = "stylesheet" type = "text/css" >
-		<link href = "css/jquery.dataTables.min.css" rel = "stylesheet" type = "text/css" >
+		<link  rel = "stylesheet" href = "bootstrap/css/jquery.dataTables.min.css" type = "text/css" >
 </head>
 <body>
 
@@ -99,7 +99,7 @@
 				<center><h3>List of student</h3></center>
 				<br />
 				<?php $results = mysqli_query($db, "SELECT * FROM student,program WHERE student.course_code = program.course_code GROUP BY last_name"); ?>
-				<table class="display" id = "myTable">
+				<table class="table table-bordered table-hover table-striped" id = "list_of_student">
 				  <thead class="thead-dark">
 				    <tr>
 					  <th scope="col">ID Number</th>
@@ -155,9 +155,9 @@
 			
 		
 	</div>
-<script type="text/javascript">
+<script>
 	$(document).ready( function () {
-    $('#myTable').DataTable();
+    $('#list_of_student').DataTable();
 	} );
 </script>	
 </body>

@@ -364,8 +364,8 @@ if (isset($_POST['login'])){
 		$status = $_POST['status'];
 
 
-		$sql = "INSERT INTO fines (id_number, event_code, penalty, status  )
-			VALUES ('$id_number','$event_code','$penalty','')";
+		$sql = "INSERT INTO fines (id_number, event_code, penalty )
+			VALUES ('$id_number','$event_code','$penalty')";
 			mysqli_query($db, $sql);
 			$_SESSION['message'] = "successfully saved";
 			header('location: add_new_fines.php'); //redirect to homepage
@@ -375,13 +375,14 @@ if (isset($_POST['login'])){
 	if (isset($_POST['edit_1'])) {
 		$id_number = $_POST['id_number'];
 		$status = $_POST['status'];
+		$event_code = $_POST["event_code"];
 		$date_paid = $_POST['date_paid'];
 
-	$query = "SELECT *,SUM(penalty) FROM fines WHERE id_number='$id_number'";
+	$query = "SELECT DISTINCT id_number FROM fines WHERE status='Unpaid' AND id_number='$id_number' AND event_code='$event_code'";
 	$results = mysqli_query($db, $query);
 	if (mysqli_num_rows($results)==1){
 		while ($row = mysqli_fetch_assoc($results)) {
-			mysqli_query($db, "UPDATE fines SET id_number ='$id_number',status ='$status',date_paid ='$date_paid' WHERE id_number='$id_number'");
+			mysqli_query($db, "UPDATE fines SET /*id_number ='$id_number',*/status ='$status',date_paid ='$date_paid'  WHERE event_code='$event_code' AND id_number='$id_number'");
 			$_SESSION['message'] = "Successfully updated!"; 
 			header('location: fines.php');
 			}

@@ -12,7 +12,7 @@
 		<script type="text/javascript" src="bootstrap/js/jquery.dataTables.min.js"></script>
 		<link rel = "stylesheet" href = "font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css">
 		<link href = "css/style.css" rel = "stylesheet" type = "text/css" >
-		<link href = "css/jquery.dataTables.min.css" rel = "stylesheet" type = "text/css" >
+		<link  rel = "stylesheet" href = "bootstrap/css/jquery.dataTables.min.css" type = "text/css" >
 </head>
 <body>
 	<!-- Header Area -->
